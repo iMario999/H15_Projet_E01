@@ -7,6 +7,14 @@ namespace H15_Projet_E01.DAL
 {
     public class UnitOfWork: IUnitOfWork, IDisposable
     {
-        
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

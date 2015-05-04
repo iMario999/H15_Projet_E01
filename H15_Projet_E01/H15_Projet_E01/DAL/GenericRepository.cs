@@ -10,7 +10,7 @@ namespace H15_Projet_E01.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
     {
-        internal PhotoDuvalEntities context;
+        /*internal PhotoDuvalEntities context;
         internal DbSet<TEntity> dbSet;
 
         public GenericRepository(PhotoDuvalEntities context)
@@ -82,6 +82,6 @@ namespace H15_Projet_E01.DAL
         {
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
-        }
+        }*/
     }
 }
