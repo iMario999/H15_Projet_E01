@@ -133,64 +133,53 @@
     </Compile>
     <Compile Include="Models\Agent.cs">
       <DependentUpon>photoDuvalModel.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\photoDuvalModel.Context.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\photoDuvalModel.Context1.cs">
-      <DependentUpon>photoDuvalModel.Context.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>photoDuvalModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\photoDuvalModel.cs">
-      <SubType>Code</SubType>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>photoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\photoDuvalModel.Designer.cs">
-      <DependentUpon>photoDuvalModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\photoDuvalModel1.cs">
-      <DependentUpon>photoDuvalModel.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\photoDuvalModel1.Designer.cs">
+      <DesignTime>True</DesignTime>
       <DependentUpon>photoDuvalModel.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\Seance.cs">
       <DependentUpon>photoDuvalModel.tt</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\PhotoDuval.mdf" />
-    <Content Include="App_Data\PhotoDuval_log.ldf">
-      <DependentUpon>PhotoDuval.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\photoDuvalModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>photoDuvalModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <Content Include="Models\photoDuvalModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>photoDuvalModel.Context1.cs</LastGenOutput>
+      <DependentUpon>photoDuvalModel.edmx</DependentUpon>
+      <LastGenOutput>photoDuvalModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\photoDuvalModel.edmx.diagram">
       <DependentUpon>photoDuvalModel.edmx</DependentUpon>
     </Content>
     <Content Include="Models\photoDuvalModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>photoDuvalModel1.cs</LastGenOutput>
+      <DependentUpon>photoDuvalModel.edmx</DependentUpon>
+      <LastGenOutput>photoDuvalModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -219,7 +208,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -229,12 +220,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\photoDuvalModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>photoDuvalModel1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
