@@ -1,0 +1,75 @@
+﻿@model IEnumerable<H15_Projet_E01.Models.Seance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateSeance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ville)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commentaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FactureID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeureSeance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agent.Nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateSeance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ville)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commentaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FactureID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeureSeance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agent.Nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SeanceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SeanceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SeanceID })
+        </td>
+    </tr>
+}
+
+</table>
