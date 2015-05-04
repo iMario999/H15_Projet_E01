@@ -15,6 +15,9 @@
             @Html.DisplayNameFor(model => model.DateSeance)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.HeureSeance)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Adresse)
         </th>
         <th>
@@ -28,10 +31,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FactureID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HeureSeance)
-        </th>
+        </th> 
         <th>
             @Html.DisplayNameFor(model => model.Agent.Nom)
         </th>
@@ -40,9 +40,26 @@
 
 @foreach (var item in Model) {
     <tr>
+        @if (item.DateSeance == null)
+        {
+            <td>
+                En attente
+            </td>
+             <td>
+                 En attente
+            </td>
+        }
+        else
+        {
         <td>
             @Html.DisplayFor(modelItem => item.DateSeance)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeureSeance)
+        </td>
+        }
+       
+
         <td>
             @Html.DisplayFor(modelItem => item.Adresse)
         </td>
@@ -58,9 +75,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.FactureID)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HeureSeance)
-        </td>
+      
         <td>
             @Html.DisplayFor(modelItem => item.Agent.Nom)
         </td>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PhotoDuvalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PhotoDuvalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent">
           <Key>
             <PropertyRef Name="AgentID" />
@@ -20,7 +20,7 @@
           <Property Name="DateSeance" Type="datetime" />
           <Property Name="Adresse" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Ville" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telephone" Type="int" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Commentaire" Type="nvarchar" MaxLength="350" Nullable="false" />
           <Property Name="AgentID" Type="int" Nullable="false" />
           <Property Name="FactureID" Type="nchar" MaxLength="10" />
@@ -46,8 +46,7 @@
             <End Role="Seance" EntitySet="Seance" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PhotoDuvalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -57,26 +56,34 @@
           </Key>
           <Property Name="AgentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Seances" Relationship="Self.FK_AgentID_SeanceID" FromRole="Agent" ToRole="Seance" />
+          <NavigationProperty Name="Seances" Relationship="PhotoDuvalModel.FK_AgentID_SeanceID" FromRole="Agent" ToRole="Seance" />
         </EntityType>
+        <EntityContainer Name="PhotoDuvalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Seances" EntityType="PhotoDuvalModel.Seance" />
+          <AssociationSet Name="FK_AgentID_SeanceID" Association="PhotoDuvalModel.FK_AgentID_SeanceID">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Seance" EntitySet="Seances" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Seance">
           <Key>
             <PropertyRef Name="SeanceID" />
           </Key>
           <Property Name="SeanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateSeance" Type="DateTime" Precision="3" />
-          <Property Name="Adresse" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Telephone" Type="Int32" Nullable="false" />
-          <Property Name="Commentaire" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adresse" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Ville" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Commentaire" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="AgentID" Type="Int32" Nullable="false" />
           <Property Name="FactureID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="HeureSeance" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Agent" Relationship="Self.FK_AgentID_SeanceID" FromRole="Seance" ToRole="Agent" />
+          <NavigationProperty Name="Agent" Relationship="PhotoDuvalModel.FK_AgentID_SeanceID" FromRole="Seance" ToRole="Agent" />
         </EntityType>
         <Association Name="FK_AgentID_SeanceID">
-          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
-          <End Role="Seance" Type="Self.Seance" Multiplicity="*" />
+          <End Type="PhotoDuvalModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="PhotoDuvalModel.Seance" Role="Seance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Agent">
               <PropertyRef Name="AgentID" />
@@ -86,14 +93,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PhotoDuvalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Agents" EntityType="Self.Agent" />
-          <EntitySet Name="Seances" EntityType="Self.Seance" />
-          <AssociationSet Name="FK_AgentID_SeanceID" Association="Self.FK_AgentID_SeanceID">
-            <End Role="Agent" EntitySet="Agents" />
-            <End Role="Seance" EntitySet="Seances" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -111,15 +110,15 @@
           <EntitySetMapping Name="Seances">
             <EntityTypeMapping TypeName="PhotoDuvalModel.Seance">
               <MappingFragment StoreEntitySet="Seance">
-                <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
-                <ScalarProperty Name="DateSeance" ColumnName="DateSeance" />
-                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
-                <ScalarProperty Name="Ville" ColumnName="Ville" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
-                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
-                <ScalarProperty Name="FactureID" ColumnName="FactureID" />
                 <ScalarProperty Name="HeureSeance" ColumnName="HeureSeance" />
+                <ScalarProperty Name="FactureID" ColumnName="FactureID" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="DateSeance" ColumnName="DateSeance" />
+                <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

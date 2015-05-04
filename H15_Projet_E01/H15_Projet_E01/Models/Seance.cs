@@ -18,7 +18,7 @@ namespace H15_Projet_E01.Models
         public Nullable<System.DateTime> DateSeance { get; set; }
         public string Adresse { get; set; }
         public string Ville { get; set; }
-        public int Telephone { get; set; }
+        public string Telephone { get; set; }
         public string Commentaire { get; set; }
         public int AgentID { get; set; }
         public string FactureID { get; set; }

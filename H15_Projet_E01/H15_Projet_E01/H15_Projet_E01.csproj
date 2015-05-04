@@ -149,6 +149,7 @@
     <Compile Include="Models\Seance.cs">
       <DependentUpon>photoDuvalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SeanceMetaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
