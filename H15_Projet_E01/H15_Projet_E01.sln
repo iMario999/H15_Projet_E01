@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H15_Projet_E01", "H15_Projet_E01\H15_Projet_E01.csproj", "{F8D56D7B-741E-4595-BEFC-35E2756097A9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.di.college-em.info/tfs/h15%20projet%20444_406_485
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = H15_Projet_E01\\H15_Projet_E01.csproj
+		SccProjectName1 = H15_Projet_E01
+		SccLocalPath1 = H15_Projet_E01
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8D56D7B-741E-4595-BEFC-35E2756097A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D56D7B-741E-4595-BEFC-35E2756097A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D56D7B-741E-4595-BEFC-35E2756097A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D56D7B-741E-4595-BEFC-35E2756097A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
