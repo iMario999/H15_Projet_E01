@@ -1,19 +1,19 @@
-﻿using System;
+﻿using H15_Projet_E01.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
-using H15_Projet_E01.Models;
 
 namespace H15_Projet_E01.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
     {
-        internal H15_Projet_E01.Models.photoDuvalModel.Context.cs context;
+        internal PhotoDuvalEntities context;
         internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(Lab10Context context)
+        public GenericRepository(PhotoDuvalEntities context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
