@@ -123,6 +123,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SeancesController.cs" />
     <Compile Include="DAL\AgentRepository.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Models\Agent.cs">
       <DependentUpon>photoDuvalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AgentMetaData.cs" />
     <Compile Include="Models\photoDuvalModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -220,6 +222,11 @@
     <Content Include="Views\Seances\Details.cshtml" />
     <Content Include="Views\Seances\Edit.cshtml" />
     <Content Include="Views\Seances\Index.cshtml" />
+    <Content Include="Views\Agents\Create.cshtml" />
+    <Content Include="Views\Agents\Delete.cshtml" />
+    <Content Include="Views\Agents\Details.cshtml" />
+    <Content Include="Views\Agents\Edit.cshtml" />
+    <Content Include="Views\Agents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
