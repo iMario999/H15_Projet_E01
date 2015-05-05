@@ -6,7 +6,7 @@ using System.Web;
 
 namespace H15_Projet_E01.Models
 {
-     [MetadataType(typeof(SeanceMetaData))]
+    [MetadataType(typeof(SeanceMetaData))]
     public partial class Seance
     {       
         internal sealed class SeanceMetaData
