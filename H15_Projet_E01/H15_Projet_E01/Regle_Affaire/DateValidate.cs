@@ -29,9 +29,12 @@ namespace H15_Projet_E01.Regle_Affaire
             {
                 if (s.DateSeance == seance.DateSeance)
                 {
-                    TimeSpan ts = (TimeSpan)(((DateTime)s.HeureSeance).TimeOfDay - ((DateTime)seance.HeureSeance).TimeOfDay);
-                    if (ts.Hours < 4 && ts.Hours > -4)
-                        return new ValidationResult("La différence entre deux séances en même journée devrait être plus de 4h. La séance la plus proche : " + s.DateSeance.Value.ToString("dd-MM-yyyy") + " " + s.HeureSeance.Value.ToString("HH:mm"));
+                    if (s.SeanceID != seance.SeanceID)
+                    {
+                        TimeSpan ts = (TimeSpan)(((DateTime)s.HeureSeance).TimeOfDay - ((DateTime)seance.HeureSeance).TimeOfDay);
+                        if (ts.Hours < 4 && ts.Hours > -4)
+                            return new ValidationResult("La différence entre deux séances en même journée devrait être plus de 4h. La séance la plus proche : " + s.DateSeance.Value.ToString("dd-MM-yyyy") + " " + s.HeureSeance.Value.ToString("HH:mm"));
+                    }
                 }
             }
             
