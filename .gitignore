@@ -192,3 +192,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+H15_Projet_E01/H15_Projet_E01/App_Data/PhotoDuval.mdf
+H15_Projet_E01/H15_Projet_E01/App_Data/PhotoDuval_log.ldf
