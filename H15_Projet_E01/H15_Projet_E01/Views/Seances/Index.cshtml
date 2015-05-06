@@ -1,5 +1,6 @@
-﻿@model IEnumerable<H15_Projet_E01.Models.Seance>
-
+﻿@model PagedList.IPagedList<H15_Projet_E01.Models.Seance>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Les séances à venir";
 }
@@ -17,31 +18,32 @@
 </ul>
 
 
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DateSeance)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HeureSeance)
+            Heure
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Adresse)
+            Adresse
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ville)
+            Ville
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Telephone)
+            Num. Téléphone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Commentaire)
+            Commentaire
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FactureID)
+            FactureId
         </th> 
         <th>
-            @Html.DisplayNameFor(model => model.Agent.Nom)
+            Agent
         </th>
         <th></th>
     </tr>
@@ -96,3 +98,6 @@
 }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

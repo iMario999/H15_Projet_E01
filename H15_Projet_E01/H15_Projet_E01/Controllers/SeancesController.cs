@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using H15_Projet_E01.Models;
 using H15_Projet_E01.DAL;
+using PagedList;
 
 namespace H15_Projet_E01.Controllers
 {
@@ -16,7 +17,7 @@ namespace H15_Projet_E01.Controllers
         private PhotoDuvalEntities db = new PhotoDuvalEntities();
         private UnitOfWork unitOfWork = new UnitOfWork();
         // GET: Seances
-        public ActionResult Index(bool? enAttente)
+        public ActionResult Index(bool? enAttente, int? page)
         {
             var seances = db.Seances.Include(s => s.Agent);
             //var seances = unitOfWork.SeanceRepository.GetSeances();
@@ -38,8 +39,9 @@ namespace H15_Projet_E01.Controllers
                           where seance.DateSeance == null
                           select seance;
             }
-
-            return View(seances.ToList());
+            int pageSize = 3;
+            int pageNumber = page ?? 1;
+            return View(seances.OrderBy(s => s.DateSeance).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Seances/Details/5
