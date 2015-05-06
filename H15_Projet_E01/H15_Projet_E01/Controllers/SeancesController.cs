@@ -19,8 +19,8 @@ namespace H15_Projet_E01.Controllers
 
         private void PopulateAgentsDrop(object selectedType = null)
         {
-            var TypeQuery = unitOfWork.AgentRepository.Get(orderBy: Q => Q.OrderBy(t => t.Nom));
-            ViewBag.TypeActiviteId = new SelectList(TypeQuery, "AgentID", "Nom", selectedType);
+            var TypeQuery = unitOfWork.AgentRepository.GetAgents();
+            ViewBag.AgentID = new SelectList(TypeQuery, "AgentID", "Nom", selectedType);
         }
 
 
@@ -104,7 +104,8 @@ namespace H15_Projet_E01.Controllers
         // GET: Seances/Create
         public ActionResult Create()
         {
-            ViewBag.AgentID = new SelectList( unitOfWork.SeanceRepository.GetSeances(), "AgentID", "Nom");
+            //ViewBag.AgentID = new SelectList( unitOfWork.SeanceRepository.get(), "AgentID", "Nom");
+           PopulateAgentsDrop();
             return View();
         }
 
