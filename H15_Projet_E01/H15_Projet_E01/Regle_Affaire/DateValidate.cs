@@ -12,24 +12,30 @@ namespace H15_Projet_E01.Regle_Affaire
     {
         public static ValidationResult Validate(Seance seance)
         {
-            if (seance.DateSeance == null && seance.HeureSeance == null)
+            if (seance.DateSeance == null)
             {
-                return ValidationResult.Success;
+                if (seance.HeureSeance != null)
+                    return new ValidationResult("Vous devez choisir la date ou laisser l'heure vide");
             }
-
-            UnitOfWork unitOfWork = new UnitOfWork();
-            /*
-            foreach (Seance s in unitOfWork.SeanceRepository.GetSeances())
+            else
             {
-                
-                if (s.DateSeance == seance.DateSeance)
+                if (seance.HeureSeance == null)
+                    return new ValidationResult("Vous devez choisir l'heure ou laisser la date vide");
+                if (seance.DateSeance < DateTime.Now)
+                    return new ValidationResult("La date doit être dans le future");
+               
+                UnitOfWork unitOfWork = new UnitOfWork();
+
+                foreach (Seance s in unitOfWork.SeanceRepository.GetSeances())
                 {
-                    TimeSpan ts = (TimeSpan)(s.HeureSeance - seance.HeureSeance);
-                    if (ts.Hours < 4 || ts.Hours > -4)
-                        return new ValidationResult("La différence entre deux séances en même journée devrait être plus de 4h. La séance la plus proche : " + s.DateSeance.Value.ToString("dd-MM-yyyy") + " "+  s.HeureSeance.Value.ToString("HH:mm"));
+                    if (s.DateSeance == seance.DateSeance)
+                    {
+                        TimeSpan ts = (TimeSpan)(((DateTime)s.HeureSeance).TimeOfDay - ((DateTime)seance.HeureSeance).TimeOfDay);
+                        if (ts.Hours < 4 && ts.Hours > -4)
+                            return new ValidationResult("La différence entre deux séances en même journée devrait être plus de 4h. La séance la plus proche : " + s.DateSeance.Value.ToString("dd-MM-yyyy") + " " + s.HeureSeance.Value.ToString("HH:mm"));
+                    }
                 }
             }
-             */
             return ValidationResult.Success;
 
         }
