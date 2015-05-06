@@ -53,7 +53,9 @@ namespace H15_Projet_E01.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                seances = seances.Where(s => s.Agent.Nom.Contains(searchString));
+                seances = from Seance seance in unitOfWork.SeanceRepository.GetSeances()
+                          where (seance.Agent.Nom.ToUpper() == searchString.ToUpper())
+                          select seance;
             }
 
             ViewBag.CurrentFilter = searchString;
