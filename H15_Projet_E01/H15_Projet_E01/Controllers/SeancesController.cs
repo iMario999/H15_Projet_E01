@@ -83,7 +83,7 @@ namespace H15_Projet_E01.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = page ?? 1;
             return View(seances.ToPagedList(pageNumber, pageSize));
         }
