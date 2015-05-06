@@ -30,6 +30,7 @@ namespace H15_Projet_E01.DAL
             Delete(id);
         }
 
+
         public ICollection<Seance> getFutureSeances()
         {
             var seances = from seance in Get()

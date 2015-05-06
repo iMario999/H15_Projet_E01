@@ -7,17 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using H15_Projet_E01.Models;
+using H15_Projet_E01.DAL;
 
 namespace H15_Projet_E01.Controllers
 {
     public class SeancesController : Controller
     {
         private PhotoDuvalEntities db = new PhotoDuvalEntities();
-
+        private UnitOfWork unitOfWork = new UnitOfWork();
         // GET: Seances
         public ActionResult Index(bool? enAttente)
         {
             var seances = db.Seances.Include(s => s.Agent);
+            //var seances = unitOfWork.SeanceRepository.GetSeances();
             if (enAttente == null)
             {
                 //do nothing
@@ -48,6 +50,7 @@ namespace H15_Projet_E01.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Seance seance = db.Seances.Find(id);
+            //Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id.value);
             if (seance == null)
             {
                 return HttpNotFound();
@@ -58,7 +61,7 @@ namespace H15_Projet_E01.Controllers
         // GET: Seances/Create
         public ActionResult Create()
         {
-            ViewBag.AgentID = new SelectList(db.Agents, "AgentID", "Nom");
+            ViewBag.AgentID = new SelectList(db.Agents /*unitOfWork.SeanceRepository.GetSeances()*/, "AgentID", "Nom");
             return View();
         }
 
@@ -73,6 +76,8 @@ namespace H15_Projet_E01.Controllers
             {
                 db.Seances.Add(seance);
                 db.SaveChanges();
+                //unitOfWork.SeanceRepository.InsertSeance(seance);
+                //unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 
@@ -88,11 +93,12 @@ namespace H15_Projet_E01.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Seance seance = db.Seances.Find(id);
+            //Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id.value);
             if (seance == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AgentID = new SelectList(db.Agents, "AgentID", "Nom", seance.AgentID);
+            ViewBag.AgentID = new SelectList(db.Agents /*unitOfWork.SeanceRepository.GetSeances()*/, "AgentID", "Nom", seance.AgentID);
             return View(seance);
         }
 
@@ -107,9 +113,11 @@ namespace H15_Projet_E01.Controllers
             {
                 db.Entry(seance).State = EntityState.Modified;
                 db.SaveChanges();
+                //unitOfWork.SeanceRepository.UpdateSeance(seance);
+                //unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.AgentID = new SelectList(db.Agents, "AgentID", "Nom", seance.AgentID);
+            ViewBag.AgentID = new SelectList(db.Agents /*unitOfWork.SeanceRepository.GetSeances()*/, "AgentID", "Nom", seance.AgentID);
             return View(seance);
         }
 
@@ -121,6 +129,8 @@ namespace H15_Projet_E01.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Seance seance = db.Seances.Find(id);
+
+            //Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id.value);
             if (seance == null)
             {
                 return HttpNotFound();
@@ -136,6 +146,9 @@ namespace H15_Projet_E01.Controllers
             Seance seance = db.Seances.Find(id);
             db.Seances.Remove(seance);
             db.SaveChanges();
+
+            //unitOfWork.SeanceRepository.DeleteSeance(id);
+            //unitOfWork.SeanceRepository.Save();
             return RedirectToAction("Index");
         }
 
@@ -144,6 +157,8 @@ namespace H15_Projet_E01.Controllers
             if (disposing)
             {
                 db.Dispose();
+
+                //unitOfWork.SeanceRepository.Dispose();
             }
             base.Dispose(disposing);
         }
