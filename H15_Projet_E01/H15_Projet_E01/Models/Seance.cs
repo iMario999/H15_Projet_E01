@@ -14,6 +14,11 @@ namespace H15_Projet_E01.Models
     
     public partial class Seance
     {
+        public Seance()
+        {
+            this.Statuts = new HashSet<Statut>();
+        }
+    
         public int SeanceID { get; set; }
         public Nullable<System.DateTime> DateSeance { get; set; }
         public string Adresse { get; set; }
@@ -23,7 +28,10 @@ namespace H15_Projet_E01.Models
         public int AgentID { get; set; }
         public string FactureID { get; set; }
         public Nullable<System.DateTime> HeureSeance { get; set; }
+        public Nullable<int> PhotographeID { get; set; }
     
         public virtual Agent Agent { get; set; }
+        public virtual Photographe Photographe { get; set; }
+        public virtual ICollection<Statut> Statuts { get; set; }
     }
 }
