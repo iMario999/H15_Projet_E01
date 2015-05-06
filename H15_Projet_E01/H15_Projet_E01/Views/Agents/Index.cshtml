@@ -4,15 +4,30 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Agents</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Nouvel Agent", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commentaire)
         </th>
         <th></th>
     </tr>
@@ -23,9 +38,24 @@
             @Html.DisplayFor(modelItem => item.Nom)
         </td>
         <td>
-            @Html.ActionLink("Modifier", "Edit", new { id=item.AgentID }) |
-            @Html.ActionLink("Détails", "Details", new { id=item.AgentID }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.AgentID })
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commentaire)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AgentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AgentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AgentID })
         </td>
     </tr>
 }
