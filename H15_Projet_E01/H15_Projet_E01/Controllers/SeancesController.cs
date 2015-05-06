@@ -54,14 +54,12 @@ namespace H15_Projet_E01.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
 
-                seances = from Seance seance in unitOfWork.SeanceRepository.GetSeances()
+                seances = from Seance seance in seances
                           where (seance.Agent.Nom.ToUpper() == searchString.ToUpper())
                           select seance;
             }
 
-            ViewBag.CurrentFilter = searchString;
 
-            ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             ViewBag.AgentSortParm = sortOrder == "Agent" ? "agent_desc" : "Agent";
@@ -82,6 +80,10 @@ namespace H15_Projet_E01.Controllers
                     seances = seances.OrderBy(s => s.DateSeance);
                     break;
             }
+
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.currentAttente = enAttente;
 
             int pageSize = 5;
             int pageNumber = page ?? 1;
