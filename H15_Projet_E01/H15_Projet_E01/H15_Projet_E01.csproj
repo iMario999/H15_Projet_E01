@@ -142,26 +142,26 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Agent.cs">
-      <DependentUpon>photoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AgentMetaData.cs" />
-    <Compile Include="Models\photoDuvalModel.Context.cs">
+    <Compile Include="Models\PhotoDuvalModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>photoDuvalModel.Context.tt</DependentUpon>
+      <DependentUpon>PhotoDuvalModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\photoDuvalModel.cs">
+    <Compile Include="Models\PhotoDuvalModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>photoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\photoDuvalModel.Designer.cs">
+    <Compile Include="Models\PhotoDuvalModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>photoDuvalModel.edmx</DependentUpon>
+      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Seance.cs">
-      <DependentUpon>photoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeanceMetaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,10 +169,6 @@
     <Compile Include="Regle_Affaire\SeanceValidation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\PhotoDuval.mdf" />
-    <Content Include="App_Data\PhotoDuval_log.ldf">
-      <DependentUpon>PhotoDuval.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -182,22 +178,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\photoDuvalModel.edmx">
+    <EntityDeploy Include="Models\PhotoDuvalModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>photoDuvalModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>PhotoDuvalModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\photoDuvalModel.Context.tt">
+    <Content Include="Models\PhotoDuvalModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>photoDuvalModel.edmx</DependentUpon>
-      <LastGenOutput>photoDuvalModel.Context.cs</LastGenOutput>
+      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
+      <LastGenOutput>PhotoDuvalModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\photoDuvalModel.edmx.diagram">
-      <DependentUpon>photoDuvalModel.edmx</DependentUpon>
+    <Content Include="Models\PhotoDuvalModel.edmx.diagram">
+      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\photoDuvalModel.tt">
+    <Content Include="Models\PhotoDuvalModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>photoDuvalModel.edmx</DependentUpon>
-      <LastGenOutput>photoDuvalModel.cs</LastGenOutput>
+      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
+      <LastGenOutput>PhotoDuvalModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -237,7 +233,9 @@
     <Content Include="Views\Agents\Edit.cshtml" />
     <Content Include="Views\Agents\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

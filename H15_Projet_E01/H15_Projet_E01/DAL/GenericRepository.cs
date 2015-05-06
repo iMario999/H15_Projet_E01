@@ -10,10 +10,10 @@ namespace H15_Projet_E01.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal PhotoDuvalEntities context;
+        internal H15_PROJET_E01Entities context;
         internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(PhotoDuvalEntities context)
+        public GenericRepository(H15_PROJET_E01Entities context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

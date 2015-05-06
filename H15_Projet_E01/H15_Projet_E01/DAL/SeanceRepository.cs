@@ -8,7 +8,7 @@ namespace H15_Projet_E01.DAL
 {
     public class SeanceRepository: GenericRepository<Seance>
     {
-        public SeanceRepository(PhotoDuvalEntities context) : base(context) { }
+        public SeanceRepository(H15_PROJET_E01Entities context) : base(context) { }
         public IEnumerable<Seance> GetSeances()
         {
             return Get();

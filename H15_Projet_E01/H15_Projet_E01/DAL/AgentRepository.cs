@@ -8,7 +8,7 @@ namespace H15_Projet_E01.DAL
 {
     public class AgentRepository: GenericRepository<Agent>
     {
-        public AgentRepository(PhotoDuvalEntities context) : base(context) { }
+        public AgentRepository(H15_PROJET_E01Entities context) : base(context) { }
         public IEnumerable<Agent> GetAgents()
         {
             return Get();
