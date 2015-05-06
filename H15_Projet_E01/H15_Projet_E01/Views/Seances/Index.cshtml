@@ -4,23 +4,18 @@
     ViewBag.Title = "Les séances à venir";
 }
 
-<h2>Index</h2>
+<h2>Les séances à venir</h2>
 
 <p>
     @Html.ActionLink("Demander une séance", "Create")
 </p>
 
-<p>
-    @Html.ActionLink("Affichage brute", ".")
-</p>
+<ul>
+    <li>@Html.ActionLink("Affichage brute", ".")</li>
+    <li>@Html.ActionLink("Afficher seulement les séances en atente", ".", new { enAttente = true })</li>
+    <li>@Html.ActionLink("Afficher seulement les séances réservées", ".", new { enAttente = false })</li>
+</ul>
 
-<p>
-    @Html.ActionLink("Afficher seulement les séances en atente", ".", new { enAttente = true })
-</p>
-
-<p>
-    @Html.ActionLink("Afficher seulement les séances réservées", ".", new { enAttente = false })
-</p>
 
 <table class="table">
     <tr>

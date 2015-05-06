@@ -12,6 +12,7 @@ namespace H15_Projet_E01.Models
         internal sealed class SeanceMetaData
         {
             public int SeanceID { get; set; }
+            [DataType(DataType.Date)]
             public Nullable<System.DateTime> DateSeance { get; set; }
             [Required]
             public string Adresse { get; set; }
@@ -24,6 +25,7 @@ namespace H15_Projet_E01.Models
             public string Commentaire { get; set; }
             public int AgentID { get; set; }
             public string FactureID { get; set; }
+            [DataType(DataType.Time)]
             public Nullable<System.DateTime> HeureSeance { get; set; }
             
         } 
