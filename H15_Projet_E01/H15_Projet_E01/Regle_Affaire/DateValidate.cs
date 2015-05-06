@@ -21,6 +21,7 @@ namespace H15_Projet_E01.Regle_Affaire
             /*
             foreach (Seance s in unitOfWork.SeanceRepository.GetSeances())
             {
+                
                 if (s.DateSeance == seance.DateSeance)
                 {
                     TimeSpan ts = (TimeSpan)(s.HeureSeance - seance.HeureSeance);
@@ -28,7 +29,7 @@ namespace H15_Projet_E01.Regle_Affaire
                         return new ValidationResult("La différence entre deux séances en même journée devrait être plus de 4h. La séance la plus proche : " + s.DateSeance.Value.ToString("dd-MM-yyyy") + " "+  s.HeureSeance.Value.ToString("HH:mm"));
                 }
             }
-             * */
+             */
             return ValidationResult.Success;
 
         }

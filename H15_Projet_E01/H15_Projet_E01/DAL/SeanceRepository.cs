@@ -25,7 +25,7 @@ namespace H15_Projet_E01.DAL
         {
             Update(seance);
         }
-        public void DeleteSeance(int id)
+        public void DeleteSeance(int? id)
         {
             Delete(id);
         }

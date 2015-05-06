@@ -13,7 +13,7 @@ namespace H15_Projet_E01.DAL
         {
             return Get();
         }
-        public Agent GetAgentByID(int id)
+        public Agent GetAgentByID(int? id)
         {
             return GetByID(id);
         }
@@ -25,7 +25,7 @@ namespace H15_Projet_E01.DAL
         {
             Update(agent);
         }
-        public void DeleteAgent(int id)
+        public void DeleteAgent(int? id)
         {
             Delete(id);
         }

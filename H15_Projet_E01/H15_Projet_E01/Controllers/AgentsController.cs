@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using H15_Projet_E01.Models;
+using H15_Projet_E01.DAL;
 
 namespace H15_Projet_E01.Controllers
 {
     public class AgentsController : Controller
     {
-        private PhotoDuvalEntities db = new PhotoDuvalEntities();
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Agents
         public ActionResult Index()
         {
-            return View(db.Agents.ToList());
+            return View(unitOfWork.AgentRepository.GetAgents().ToList());
         }
 
         // GET: Agents/Details/5
@@ -27,7 +28,7 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Agent agent = db.Agents.Find(id);
+            Agent agent = unitOfWork.AgentRepository.GetAgentByID(id);
             if (agent == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,8 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Agents.Add(agent);
-                db.SaveChanges();
+                unitOfWork.AgentRepository.InsertAgent(agent);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +66,7 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Agent agent = db.Agents.Find(id);
+            Agent agent = unitOfWork.AgentRepository.GetAgentByID(id);
             if (agent == null)
             {
                 return HttpNotFound();
@@ -82,8 +83,8 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(agent).State = EntityState.Modified;
-                db.SaveChanges();
+                unitOfWork.AgentRepository.UpdateAgent(agent);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(agent);
@@ -96,7 +97,7 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Agent agent = db.Agents.Find(id);
+            Agent agent = unitOfWork.AgentRepository.GetAgentByID(id);
             if (agent == null)
             {
                 return HttpNotFound();
@@ -109,9 +110,8 @@ namespace H15_Projet_E01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Agent agent = db.Agents.Find(id);
-            db.Agents.Remove(agent);
-            db.SaveChanges();
+            unitOfWork.AgentRepository.DeleteAgent(id);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +119,7 @@ namespace H15_Projet_E01.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
