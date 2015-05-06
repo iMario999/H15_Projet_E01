@@ -13,10 +13,10 @@ namespace H15_Projet_E01.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class H15_PROJET_E01Entities : DbContext
+    public partial class H15_PROJET_E01Entities1 : DbContext
     {
-        public H15_PROJET_E01Entities()
-            : base("name=H15_PROJET_E01Entities")
+        public H15_PROJET_E01Entities1()
+            : base("name=H15_PROJET_E01Entities1")
         {
         }
     

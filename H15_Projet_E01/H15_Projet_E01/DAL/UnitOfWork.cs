@@ -8,7 +8,7 @@ namespace H15_Projet_E01.DAL
 {
     public class UnitOfWork: IUnitOfWork, IDisposable
     {
-        private H15_PROJET_E01Entities context = new H15_PROJET_E01Entities();
+        private H15_PROJET_E01Entities1 context = new H15_PROJET_E01Entities1();
 
         private SeanceRepository seanceRepository;
         private AgentRepository agentRepository;

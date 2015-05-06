@@ -10,10 +10,10 @@ namespace H15_Projet_E01.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal H15_PROJET_E01Entities context;
+        internal H15_PROJET_E01Entities1 context;
         internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(H15_PROJET_E01Entities context)
+        public GenericRepository(H15_PROJET_E01Entities1 context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

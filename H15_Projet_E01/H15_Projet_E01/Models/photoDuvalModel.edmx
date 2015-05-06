@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="H15_PROJET_E01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="H15_PROJET_E01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent">
           <Key>
             <PropertyRef Name="AgentID" />
@@ -46,7 +46,8 @@
             <End Role="Seance" EntitySet="Seance" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="H15_PROJET_E01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -85,7 +86,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="H15_PROJET_E01Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="H15_PROJET_E01Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Agents" EntityType="Self.Agent" />
           <EntitySet Name="Seances" EntityType="Self.Seance" />
           <AssociationSet Name="FK_AgentID_SeanceID" Association="Self.FK_AgentID_SeanceID">
@@ -98,7 +99,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="H15_PROJET_E01ModelStoreContainer" CdmEntityContainer="H15_PROJET_E01Entities">
+        <EntityContainerMapping StorageEntityContainer="H15_PROJET_E01ModelStoreContainer" CdmEntityContainer="H15_PROJET_E01Entities1">
           <EntitySetMapping Name="Agents">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Agent">
               <MappingFragment StoreEntitySet="Agent">

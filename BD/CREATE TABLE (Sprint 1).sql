@@ -33,3 +33,6 @@ INSERT INTO [dbo].[Seance] ([SeanceID], [DateSeance], [Adresse], [Ville], [Telep
 INSERT INTO [dbo].[Seance] ([SeanceID], [DateSeance], [Adresse], [Ville], [Telephone], [Commentaire], [AgentID], [FactureID], [HeureSeance]) VALUES (3, NULL, N'123 rue des riches', N'ville de riches', N'450-450-4444', N'im rich come at me bro', 2, NULL, NULL)
 INSERT INTO [dbo].[Seance] ([SeanceID], [DateSeance], [Adresse], [Ville], [Telephone], [Commentaire], [AgentID], [FactureID], [HeureSeance]) VALUES (4, NULL, N'879846548498546 rue', N'Montreal on va dire', N'000-000-00000', N'test num telephone', 3, NULL, NULL)
 SET IDENTITY_INSERT [dbo].[Seance] OFF
+
+ALTER TABLE dbo.Agent
+ALTER COLUMN Nom NVARCHAR(50) NOT NULL
