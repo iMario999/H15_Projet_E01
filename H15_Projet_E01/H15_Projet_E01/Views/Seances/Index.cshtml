@@ -1,14 +1,27 @@
 ﻿@model IEnumerable<H15_Projet_E01.Models.Seance>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Les séances à venir";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Demander une séance", "Create")
 </p>
+
+<p>
+    @Html.ActionLink("Affichage brute", ".")
+</p>
+
+<p>
+    @Html.ActionLink("Afficher seulement les séances en atente", ".", new { enAttente = true })
+</p>
+
+<p>
+    @Html.ActionLink("Afficher seulement les séances réservées", ".", new { enAttente = false })
+</p>
+
 <table class="table">
     <tr>
         <th>

@@ -15,9 +15,28 @@ namespace H15_Projet_E01.Controllers
         private PhotoDuvalEntities db = new PhotoDuvalEntities();
 
         // GET: Seances
-        public ActionResult Index()
+        public ActionResult Index(bool? enAttente)
         {
             var seances = db.Seances.Include(s => s.Agent);
+            if (enAttente == null)
+            {
+                //do nothing
+            }
+            else if (enAttente == false)
+            {
+                //seances = unitOfWork.SeanceRepository.getSeanceEnAttente(false);
+                seances = from seance in db.Seances.Include(s => s.Agent)
+                          where seance.DateSeance != null
+                          select seance;
+            }
+            else
+            {
+                //seances = unitOfWork.SeanceRepository.getSeanceEnAttente(true);
+                seances = from seance in db.Seances.Include(s => s.Agent)
+                          where seance.DateSeance == null
+                          select seance;
+            }
+
             return View(seances.ToList());
         }
 
