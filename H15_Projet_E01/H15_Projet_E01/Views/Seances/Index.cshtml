@@ -97,14 +97,14 @@
             @Html.DisplayFor(modelItem => item.Agent.Nom)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SeanceID }) |
+            @Html.ActionLink("Modifier", "Edit", new { id=item.SeanceID }) |
             @Html.ActionLink("Details", "Details", new { id=item.SeanceID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SeanceID })
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.SeanceID })
         </td>
     </tr>
 }
 
 </table>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
