@@ -14,30 +14,32 @@ namespace H15_Projet_E01.Controllers
 {
     public class SeancesController : Controller
     {
-        private PhotoDuvalEntities db = new PhotoDuvalEntities();
+        
         private UnitOfWork unitOfWork = new UnitOfWork();
+
+        private void PopulateAgentsDrop(object selectedType = null)
+        {
+            var TypeQuery = unitOfWork.AgentRepository.Get(orderBy: Q => Q.OrderBy(t => t.Nom));
+            ViewBag.TypeActiviteId = new SelectList(TypeQuery, "AgentID", "Nom", selectedType);
+        }
+
+
         // GET: Seances
         public ActionResult Index(string enAttente, string sortOrder, int? page, string searchString, string currentFilter)
         {
-            var seances = db.Seances.Include(s => s.Agent);
-            //var seances = unitOfWork.SeanceRepository.GetSeances();
+           
+            var seances = unitOfWork.SeanceRepository.GetSeances();
 
             ViewBag.CurrentAttente = enAttente;
             ViewBag.AttenteShowParm = String.IsNullOrEmpty(enAttente) ? "All" : "";
 
             if (enAttente == "No")
             {
-                //seances = unitOfWork.SeanceRepository.getSeanceEnAttente(false);
-                seances = from seance in db.Seances.Include(s => s.Agent)
-                          where seance.DateSeance != null
-                          select seance;
+                seances = unitOfWork.SeanceRepository.getSeanceEnAttente(false);        
             }
             else if (enAttente == "Yes")
             {
-                //seances = unitOfWork.SeanceRepository.getSeanceEnAttente(true);
-                seances = from seance in db.Seances.Include(s => s.Agent)
-                          where seance.DateSeance == null
-                          select seance;
+                seances = unitOfWork.SeanceRepository.getSeanceEnAttente(true);            
             }
 
             if (searchString != null)
@@ -90,8 +92,8 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seance seance = db.Seances.Find(id);
-            //Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id.value);
+            
+            Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id);
             if (seance == null)
             {
                 return HttpNotFound();
@@ -102,7 +104,7 @@ namespace H15_Projet_E01.Controllers
         // GET: Seances/Create
         public ActionResult Create()
         {
-            ViewBag.AgentID = new SelectList(db.Agents /*unitOfWork.SeanceRepository.GetSeances()*/, "AgentID", "Nom");
+            ViewBag.AgentID = new SelectList( unitOfWork.SeanceRepository.GetSeances(), "AgentID", "Nom");
             return View();
         }
 
@@ -115,14 +117,13 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Seances.Add(seance);
-                db.SaveChanges();
-                //unitOfWork.SeanceRepository.InsertSeance(seance);
-                //unitOfWork.Save();
+              
+                unitOfWork.SeanceRepository.InsertSeance(seance);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AgentID = new SelectList(db.Agents, "AgentID", "Nom", seance.AgentID);
+            PopulateAgentsDrop();
             return View(seance);
         }
 
@@ -133,13 +134,13 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seance seance = db.Seances.Find(id);
-            //Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id.value);
+           
+           Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id);
             if (seance == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AgentID = new SelectList(db.Agents /*unitOfWork.SeanceRepository.GetSeances()*/, "AgentID", "Nom", seance.AgentID);
+            PopulateAgentsDrop();
             return View(seance);
         }
 
@@ -152,13 +153,12 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(seance).State = EntityState.Modified;
-                db.SaveChanges();
-                //unitOfWork.SeanceRepository.UpdateSeance(seance);
-                //unitOfWork.Save();
+               
+                unitOfWork.SeanceRepository.UpdateSeance(seance);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.AgentID = new SelectList(db.Agents /*unitOfWork.SeanceRepository.GetSeances()*/, "AgentID", "Nom", seance.AgentID);
+            PopulateAgentsDrop();
             return View(seance);
         }
 
@@ -169,9 +169,9 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seance seance = db.Seances.Find(id);
+          
 
-            //Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id.value);
+            Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id);
             if (seance == null)
             {
                 return HttpNotFound();
@@ -184,22 +184,17 @@ namespace H15_Projet_E01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Seance seance = db.Seances.Find(id);
-            db.Seances.Remove(seance);
-            db.SaveChanges();
 
-            //unitOfWork.SeanceRepository.DeleteSeance(id);
-            //unitOfWork.SeanceRepository.Save();
+            unitOfWork.SeanceRepository.DeleteSeance(id);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                db.Dispose();
-
-                //unitOfWork.SeanceRepository.Dispose();
+            {             
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

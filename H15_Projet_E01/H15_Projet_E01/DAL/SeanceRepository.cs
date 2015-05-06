@@ -13,7 +13,7 @@ namespace H15_Projet_E01.DAL
         {
             return Get();
         }
-        public Seance GetSeanceByID(int id)
+        public Seance GetSeanceByID(int? id)
         {
             return GetByID(id);
         }
