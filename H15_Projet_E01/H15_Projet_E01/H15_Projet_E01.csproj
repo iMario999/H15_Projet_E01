@@ -160,10 +160,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Photographe.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Seance.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeanceMetaData.cs" />
+    <Compile Include="Models\Statut.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regle_Affaire\DateValidate.cs" />
     <Compile Include="Regle_Affaire\SeanceValidation.cs" />
