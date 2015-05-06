@@ -17,31 +17,70 @@ namespace H15_Projet_E01.Controllers
         private PhotoDuvalEntities db = new PhotoDuvalEntities();
         private UnitOfWork unitOfWork = new UnitOfWork();
         // GET: Seances
-        public ActionResult Index(bool? enAttente, int? page)
+        public ActionResult Index(string enAttente, string sortOrder, int? page, string searchString, string currentFilter)
         {
             var seances = db.Seances.Include(s => s.Agent);
             //var seances = unitOfWork.SeanceRepository.GetSeances();
-            if (enAttente == null)
-            {
-                //do nothing
-            }
-            else if (enAttente == false)
+
+            ViewBag.CurrentAttente = enAttente;
+            ViewBag.AttenteShowParm = String.IsNullOrEmpty(enAttente) ? "All" : "";
+
+            if (enAttente == "No")
             {
                 //seances = unitOfWork.SeanceRepository.getSeanceEnAttente(false);
                 seances = from seance in db.Seances.Include(s => s.Agent)
                           where seance.DateSeance != null
                           select seance;
             }
-            else
+            else if (enAttente == "Yes")
             {
                 //seances = unitOfWork.SeanceRepository.getSeanceEnAttente(true);
                 seances = from seance in db.Seances.Include(s => s.Agent)
                           where seance.DateSeance == null
                           select seance;
             }
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                seances = seances.Where(s => s.Agent.Nom.Contains(searchString));
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.AgentSortParm = sortOrder == "Agent" ? "agent_desc" : "Agent";
+
+            switch (sortOrder)
+            {
+                case "Agent":
+                    seances = seances.OrderBy(s => s.Agent.Nom);
+                    break;
+                case "agent_desc":
+                    seances = seances.OrderByDescending(s => s.Agent.Nom);
+                    break;
+                case "date_desc":
+                    seances = seances.OrderByDescending(s => s.DateSeance);
+                    break;
+                case "Date":
+                default:
+                    seances = seances.OrderBy(s => s.DateSeance);
+                    break;
+            }
+
             int pageSize = 3;
             int pageNumber = page ?? 1;
-            return View(seances.OrderBy(s => s.DateSeance).ToPagedList(pageNumber, pageSize));
+            return View(seances.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Seances/Details/5

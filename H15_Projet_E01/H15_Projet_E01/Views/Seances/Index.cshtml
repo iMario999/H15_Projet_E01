@@ -12,17 +12,24 @@
 </p>
 
 <ul>
-    <li>@Html.ActionLink("Affichage brute", ".")</li>
-    <li>@Html.ActionLink("Afficher seulement les séances en attente", ".", new { enAttente = true })</li>
-    <li>@Html.ActionLink("Afficher seulement les séances réservées", ".", new { enAttente = false })</li>
+    <li>@Html.ActionLink("Affichage brute", ".", new { enAttente = "All" })</li>
+    <li>@Html.ActionLink("Afficher seulement les séances en attente", ".", new { enAttente = "Yes" })</li>
+    <li>@Html.ActionLink("Afficher seulement les séances réservées", ".", new { enAttente = "No" })</li>
 </ul>
 
 
+@using (Html.BeginForm("Index", "Seances", FormMethod.Get))
+{
+    <p>
+        Recherche par le nom d'agent: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Rechercher" />
+    </p>
+}
 
 <table class="table">
     <tr>
         <th>
-            Date
+            @Html.ActionLink("Date", ".", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter, ViewBag.CurrentAttente })
         </th>
         <th>
             Heure
@@ -43,7 +50,7 @@
             FactureId
         </th> 
         <th>
-            Agent
+            @Html.ActionLink("Agent", ".", new { sortOrder = ViewBag.AgentSortParm, currentFilter = ViewBag.CurrentFilter, ViewBag.CurrentAttente })
         </th>
         <th></th>
     </tr>
