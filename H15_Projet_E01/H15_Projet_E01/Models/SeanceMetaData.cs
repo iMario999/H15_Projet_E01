@@ -19,6 +19,7 @@ namespace H15_Projet_E01.Models
             [Required]
             public string Ville { get; set; }
             [Required]
+            [RegularExpression("^\\([0-9]{3}\\)-?[0-9]{3}-[0-9]{4}", ErrorMessage = "Format doit être (000)000-0000 ou (000)-000-0000")]
             public string Telephone { get; set; }
             [DataType(DataType.MultilineText)]
             [Required]
