@@ -16,7 +16,7 @@ namespace H15_Projet_E01.Models
     {
         public int NotificationID { get; set; }
         public Nullable<int> SeanceID { get; set; }
-        public Nullable<int> StatutID { get; set; }
+        public int StatutID { get; set; }
         public Nullable<System.DateTime> DateNotification { get; set; }
     
         public virtual Seance Seance { get; set; }

@@ -123,7 +123,7 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+                seance.StatutID = 1; 
                 unitOfWork.SeanceRepository.InsertSeance(seance);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
@@ -159,7 +159,7 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                seance.StatutID = 1; 
                 unitOfWork.SeanceRepository.UpdateSeance(seance);
                 unitOfWork.Save();
                 return RedirectToAction("Index");

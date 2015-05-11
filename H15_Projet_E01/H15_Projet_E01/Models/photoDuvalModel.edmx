@@ -23,7 +23,7 @@
           </Key>
           <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SeanceID" Type="int" />
-          <Property Name="StatutID" Type="int" />
+          <Property Name="StatutID" Type="int" Nullable="false" />
           <Property Name="DateNotification" Type="datetime" />
         </EntityType>
         <EntityType Name="Photographe">
@@ -47,6 +47,7 @@
           <Property Name="FactureID" Type="nchar" MaxLength="10" />
           <Property Name="HeureSeance" Type="datetime" />
           <Property Name="PhotographeID" Type="int" />
+          <Property Name="StatutID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Statut">
           <Key>
@@ -80,7 +81,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SeanceID">
-          <End Role="Seance" Type="Self.Seance" Multiplicity="0..1" />
+          <End Role="Seance" Type="Self.Seance" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seance">
@@ -92,13 +95,27 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StatutID">
-          <End Role="Statut" Type="Self.Statut" Multiplicity="0..1" />
+          <End Role="Statut" Type="Self.Statut" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statut">
               <PropertyRef Name="StatutID" />
             </Principal>
             <Dependent Role="Notifications">
+              <PropertyRef Name="StatutID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutID_Seance">
+          <End Role="Statut" Type="Self.Statut" Multiplicity="1" />
+          <End Role="Seance" Type="Self.Seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statut">
+              <PropertyRef Name="StatutID" />
+            </Principal>
+            <Dependent Role="Seance">
               <PropertyRef Name="StatutID" />
             </Dependent>
           </ReferentialConstraint>
@@ -125,6 +142,10 @@
             <End Role="Statut" EntitySet="Statut" />
             <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
+          <AssociationSet Name="FK_StatutID_Seance" Association="Self.FK_StatutID_Seance">
+            <End Role="Statut" EntitySet="Statut" />
+            <End Role="Seance" EntitySet="Seance" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -150,7 +171,7 @@
           </Key>
           <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SeanceID" Type="Int32" />
-          <Property Name="StatutID" Type="Int32" />
+          <Property Name="StatutID" Type="Int32" Nullable="false" />
           <Property Name="DateNotification" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Seance" Relationship="Self.FK_SeanceID" FromRole="Notifications" ToRole="Seance" />
           <NavigationProperty Name="Statut" Relationship="Self.FK_StatutID" FromRole="Notifications" ToRole="Statut" />
@@ -177,9 +198,11 @@
           <Property Name="FactureID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="HeureSeance" Type="DateTime" Precision="3" />
           <Property Name="PhotographeID" Type="Int32" />
+          <Property Name="StatutID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agent" Relationship="Self.FK_AgentID_SeanceID" FromRole="Seance" ToRole="Agent" />
           <NavigationProperty Name="Notifications" Relationship="Self.FK_SeanceID" FromRole="Seance" ToRole="Notifications" />
           <NavigationProperty Name="Photographe" Relationship="Self.FK_Seance_PhotographeID" FromRole="Seance" ToRole="Photographe" />
+          <NavigationProperty Name="Statut" Relationship="Self.FK_StatutID_Seance" FromRole="Seance" ToRole="Statut" />
         </EntityType>
         <EntityType Name="Statut">
           <Key>
@@ -188,6 +211,7 @@
           <Property Name="StatutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Notifications" Relationship="Self.FK_StatutID" FromRole="Statut" ToRole="Notifications" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_StatutID_Seance" FromRole="Statut" ToRole="Seance" />
         </EntityType>
         <Association Name="FK_AgentID_SeanceID">
           <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
@@ -202,7 +226,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SeanceID">
-          <End Role="Seance" Type="Self.Seance" Multiplicity="0..1" />
+          <End Role="Seance" Type="Self.Seance" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seance">
@@ -214,7 +240,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StatutID">
-          <End Role="Statut" Type="Self.Statut" Multiplicity="0..1" />
+          <End Role="Statut" Type="Self.Statut" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statut">
@@ -234,6 +262,18 @@
             </Principal>
             <Dependent Role="Seance">
               <PropertyRef Name="PhotographeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatutID_Seance">
+          <End Role="Statut" Type="Self.Statut" Multiplicity="1" />
+          <End Role="Seance" Type="Self.Seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statut">
+              <PropertyRef Name="StatutID" />
+            </Principal>
+            <Dependent Role="Seance">
+              <PropertyRef Name="StatutID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,6 +297,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Seance_PhotographeID" Association="Self.FK_Seance_PhotographeID">
             <End Role="Photographe" EntitySet="Photographes" />
+            <End Role="Seance" EntitySet="Seances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatutID_Seance" Association="Self.FK_StatutID_Seance">
+            <End Role="Statut" EntitySet="Statuts" />
             <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
         </EntityContainer>
@@ -310,6 +354,7 @@
                 <ScalarProperty Name="FactureID" ColumnName="FactureID" />
                 <ScalarProperty Name="HeureSeance" ColumnName="HeureSeance" />
                 <ScalarProperty Name="PhotographeID" ColumnName="PhotographeID" />
+                <ScalarProperty Name="StatutID" ColumnName="StatutID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
