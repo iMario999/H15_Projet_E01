@@ -12,16 +12,14 @@ namespace H15_Projet_E01.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Statut
+    public partial class Notification
     {
-        public Statut()
-        {
-            this.Notifications = new HashSet<Notification>();
-        }
+        public int NotificationID { get; set; }
+        public Nullable<int> SeanceID { get; set; }
+        public Nullable<int> StatutID { get; set; }
+        public Nullable<System.DateTime> DateNotification { get; set; }
     
-        public int StatutID { get; set; }
-        public string Nom { get; set; }
-    
-        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual Seance Seance { get; set; }
+        public virtual Statut Statut { get; set; }
     }
 }

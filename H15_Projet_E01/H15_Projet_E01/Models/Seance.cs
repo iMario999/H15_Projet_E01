@@ -16,7 +16,7 @@ namespace H15_Projet_E01.Models
     {
         public Seance()
         {
-            this.Statuts = new HashSet<Statut>();
+            this.Notifications = new HashSet<Notification>();
         }
     
         public int SeanceID { get; set; }
@@ -31,7 +31,7 @@ namespace H15_Projet_E01.Models
         public Nullable<int> PhotographeID { get; set; }
     
         public virtual Agent Agent { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
         public virtual Photographe Photographe { get; set; }
-        public virtual ICollection<Statut> Statuts { get; set; }
     }
 }

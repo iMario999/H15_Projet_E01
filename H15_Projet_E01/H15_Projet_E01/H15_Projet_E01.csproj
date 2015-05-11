@@ -145,6 +145,9 @@
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AgentMetaData.cs" />
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PhotoDuvalModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

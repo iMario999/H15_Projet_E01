@@ -26,8 +26,9 @@ namespace H15_Projet_E01.Models
         }
     
         public virtual DbSet<Agent> Agents { get; set; }
-        public virtual DbSet<Seance> Seances { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Photographe> Photographes { get; set; }
+        public virtual DbSet<Seance> Seances { get; set; }
         public virtual DbSet<Statut> Statuts { get; set; }
     }
 }
