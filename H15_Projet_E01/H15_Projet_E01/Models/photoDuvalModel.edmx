@@ -19,10 +19,9 @@
         </EntityType>
         <EntityType Name="Facture">
           <Key>
-            <PropertyRef Name="FactureID" />
+            <PropertyRef Name="SeanceID" />
           </Key>
-          <Property Name="FactureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SeanceID" Type="int" Nullable="false" />
+          <Property Name="SeanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ForfaitID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Forfait">
@@ -61,7 +60,6 @@
           <Property Name="Telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Commentaire" Type="nvarchar" MaxLength="350" Nullable="false" />
           <Property Name="AgentID" Type="int" Nullable="false" />
-          <Property Name="FactureID" Type="nchar" MaxLength="10" />
           <Property Name="HeureSeance" Type="datetime" />
           <Property Name="PhotographeID" Type="int" />
           <Property Name="StatutID" Type="int" Nullable="false" />
@@ -107,6 +105,18 @@
             </Principal>
             <Dependent Role="Seance">
               <PropertyRef Name="PhotographeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeanceFactureID">
+          <End Role="Seance" Type="Self.Seance" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Seance">
+              <PropertyRef Name="SeanceID" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="SeanceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -170,6 +180,10 @@
             <End Role="Photographe" EntitySet="Photographe" />
             <End Role="Seance" EntitySet="Seance" />
           </AssociationSet>
+          <AssociationSet Name="FK_SeanceFactureID" Association="Self.FK_SeanceFactureID">
+            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
           <AssociationSet Name="FK_SeanceID" Association="Self.FK_SeanceID">
             <End Role="Seance" EntitySet="Seance" />
             <End Role="Notification" EntitySet="Notification" />
@@ -203,11 +217,11 @@
         </EntityType>
         <EntityType Name="Facture">
           <Key>
-            <PropertyRef Name="FactureID" />
+            <PropertyRef Name="SeanceID" />
           </Key>
-          <Property Name="FactureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SeanceID" Type="Int32" Nullable="false" />
+          <Property Name="SeanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ForfaitID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Seance" Relationship="Self.FK_SeanceFactureID" FromRole="Facture" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Forfait">
           <Key>
@@ -249,12 +263,12 @@
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Commentaire" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AgentID" Type="Int32" Nullable="false" />
-          <Property Name="FactureID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="HeureSeance" Type="DateTime" Precision="3" />
           <Property Name="PhotographeID" Type="Int32" />
           <Property Name="StatutID" Type="Int32" Nullable="false" />
           <Property Name="ForfaitID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agent" Relationship="Self.FK_AgentID_SeanceID" FromRole="Seance" ToRole="Agent" />
+          <NavigationProperty Name="Facture" Relationship="Self.FK_SeanceFactureID" FromRole="Seance" ToRole="Facture" />
           <NavigationProperty Name="Forfait" Relationship="Self.FK_ForfaitID_SeanceID" FromRole="Seance" ToRole="Forfait" />
           <NavigationProperty Name="Notifications" Relationship="Self.FK_SeanceID" FromRole="Seance" ToRole="Notification" />
           <NavigationProperty Name="Photographe" Relationship="Self.FK_Seance_PhotographeID" FromRole="Seance" ToRole="Photographe" />
@@ -278,6 +292,18 @@
             </Principal>
             <Dependent Role="Seance">
               <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeanceFactureID">
+          <End Role="Seance" Type="Self.Seance" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Seance">
+              <PropertyRef Name="SeanceID" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="SeanceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -357,6 +383,10 @@
             <End Role="Agent" EntitySet="Agents" />
             <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
+          <AssociationSet Name="FK_SeanceFactureID" Association="Self.FK_SeanceFactureID">
+            <End Role="Seance" EntitySet="Seances" />
+            <End Role="Facture" EntitySet="Factures" />
+          </AssociationSet>
           <AssociationSet Name="FK_ForfaitID_SeanceID" Association="Self.FK_ForfaitID_SeanceID">
             <End Role="Forfait" EntitySet="Forfaits" />
             <End Role="Seance" EntitySet="Seances" />
@@ -400,7 +430,6 @@
           <EntitySetMapping Name="Factures">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Facture">
               <MappingFragment StoreEntitySet="Facture">
-                <ScalarProperty Name="FactureID" ColumnName="FactureID" />
                 <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
                 <ScalarProperty Name="ForfaitID" ColumnName="ForfaitID" />
               </MappingFragment>
@@ -444,7 +473,6 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
                 <ScalarProperty Name="AgentID" ColumnName="AgentID" />
-                <ScalarProperty Name="FactureID" ColumnName="FactureID" />
                 <ScalarProperty Name="HeureSeance" ColumnName="HeureSeance" />
                 <ScalarProperty Name="PhotographeID" ColumnName="PhotographeID" />
                 <ScalarProperty Name="StatutID" ColumnName="StatutID" />

@@ -26,13 +26,13 @@ namespace H15_Projet_E01.Models
         public string Telephone { get; set; }
         public string Commentaire { get; set; }
         public int AgentID { get; set; }
-        public string FactureID { get; set; }
         public Nullable<System.DateTime> HeureSeance { get; set; }
         public Nullable<int> PhotographeID { get; set; }
         public int StatutID { get; set; }
         public int ForfaitID { get; set; }
     
         public virtual Agent Agent { get; set; }
+        public virtual Facture Facture { get; set; }
         public virtual Forfait Forfait { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual Photographe Photographe { get; set; }

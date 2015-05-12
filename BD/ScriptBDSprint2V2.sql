@@ -8,7 +8,8 @@ CREATE TABLE dbo.Statut
 GO
 
 
-CREATE TABLE dbo.Notifications
+
+CREATE TABLE dbo.Notification
 (
 	NotificationID int IDENTITY(1,1) PRIMARY KEY,
 	SeanceID int NULL,
@@ -17,7 +18,7 @@ CREATE TABLE dbo.Notifications
 )
 GO
 
-ALTER TABLE dbo.Notifications
+ALTER TABLE dbo.Notification
 ADD CONSTRAINT FK_SeanceID FOREIGN KEY (SeanceID) REFERENCES dbo.Seance (SeanceID) ON DELETE CASCADE  ,
 CONSTRAINT FK_StatutID FOREIGN KEY (StatutID) REFERENCES dbo.Statut (StatutID) ON DELETE CASCADE 
 
@@ -66,7 +67,7 @@ IF(UPDATE([DateSeance]))
 				SET StatutID = 2 
 				WHERE SeanceID = @SeanceID
 
-				INSERT INTO dbo.Notifications(SeanceID, StatutID, DateNotification )
+				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
 				VALUES (@SeanceID,2,GETDATE()) 
 
 			END  
@@ -77,7 +78,7 @@ IF(UPDATE([DateSeance]))
 				SET StatutID = 3 
 				WHERE SeanceID = @SeanceID
 
-				INSERT INTO dbo.Notifications(SeanceID, StatutID, DateNotification )
+				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
 				VALUES (@SeanceID,3,GETDATE()) 
 
 			END
@@ -107,14 +108,14 @@ IF(UPDATE([StatutID]))
 			BEGIN  
 			
 				/*SI LA SEANCE EST RÉALISÉE */
-				INSERT INTO dbo.Notifications(SeanceID, StatutID, DateNotification )
+				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
 				VALUES (@SeanceID,4,GETDATE()) 
 
 			END  
 		ELSE IF ( @NouveauStatutID = 5 ) 
 			BEGIN
 				/*SI LA SEANCE EST LIVRÉE */
-				INSERT INTO dbo.Notifications(SeanceID, StatutID, DateNotification )
+				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
 				VALUES (@SeanceID,5,GETDATE()) 
 
 			END
@@ -123,7 +124,7 @@ IF(UPDATE([StatutID]))
 				/*SI LES PHOTOS DE LA SÉANCE SONT TÉLÉCHARGÉ PAR LE CLIENT  */
 				/* A FAIRE CRÉATION DE LA FACTURE DU CLIENT  */
 
-				INSERT INTO dbo.Notifications(SeanceID, StatutID, DateNotification )
+				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
 				VALUES (@SeanceID,6,GETDATE()) 
 			END 
 	END
@@ -151,13 +152,20 @@ CREATE TABLE dbo.Facture
 	ForfaitID int NOT NULL
 )
 
+ALTER TABLE [dbo].[Seance]
+ALTER COLUMN [FactureID] int NULL 
 
 ALTER TABLE dbo.Facture
-ADD CONSTRAINT FK_ForfaitID_Seance FOREIGN KEY  
+ADD CONSTRAINT FK_Facture_ForfaitID FOREIGN KEY (ForfaitID) REFERENCES dbo.Forfait (ForfaitID) 
 
+ALTER TABLE dbo.Seance
+ADD CONSTRAINT FK_SeanceFactureID FOREIGN KEY (FactureID) REFERENCES dbo.Facture (FactureID)
+
+go
+ALTER TABLE dbo.Facture
 ALTER COLUMN Prix decimal(10,2) NOT NULL 
 
-ALTER TABLE dbo.Facture 
+
 
 /*CREATE VIEW dbo.viewFactureClient 
 AS 

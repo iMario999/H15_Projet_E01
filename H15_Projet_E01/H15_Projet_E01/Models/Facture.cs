@@ -14,8 +14,9 @@ namespace H15_Projet_E01.Models
     
     public partial class Facture
     {
-        public int FactureID { get; set; }
         public int SeanceID { get; set; }
         public int ForfaitID { get; set; }
+    
+        public virtual Seance Seance { get; set; }
     }
 }
