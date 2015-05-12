@@ -50,8 +50,12 @@
             Forfait
         </th> 
 
+
         <th>
             @Html.ActionLink("Agent", "Index", new { sortOrder = ViewBag.AgentSortParm, currentFilter = ViewBag.CurrentFilter, currentAttente = ViewBag.CurrentAttente })
+        </th>
+        <th>
+            Statut
         </th>
         <th></th>
     </tr>
@@ -77,7 +81,6 @@
         </td>
         }
        
-
         <td>
             @Html.DisplayFor(modelItem => item.Adresse)
         </td>
@@ -96,6 +99,10 @@
       
         <td>
             @Html.DisplayFor(modelItem => item.Agent.Nom)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Statut.Nom)
         </td>
         <td>
             @Html.ActionLink("Modifier", "Edit", new { id=item.SeanceID }) |
