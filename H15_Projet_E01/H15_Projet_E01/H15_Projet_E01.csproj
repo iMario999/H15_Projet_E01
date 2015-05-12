@@ -133,6 +133,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SeancesController.cs" />
     <Compile Include="DAL\AgentRepository.cs" />
+    <Compile Include="DAL\ForfaitRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
@@ -145,6 +146,9 @@
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AgentMetaData.cs" />
+    <Compile Include="Models\Forfait.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Notification.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>

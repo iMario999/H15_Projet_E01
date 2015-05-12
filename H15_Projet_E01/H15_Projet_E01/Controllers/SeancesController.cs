@@ -23,6 +23,11 @@ namespace H15_Projet_E01.Controllers
             ViewBag.AgentID = new SelectList(TypeQuery, "AgentID", "Nom", selectedType);
         }
 
+        private void PopulateForfaitsDrop(object selectedType = null)
+        {
+            var TypeQuery = unitOfWork.ForfaitRepository.GetForfaits();
+            ViewBag.ForfaitID = new SelectList(TypeQuery, "ForfaitID", "Nom", selectedType);
+        }
 
         // GET: Seances
         public ActionResult Index(string enAttente, string sortOrder, int? page, string searchString, string currentFilter)
@@ -109,8 +114,8 @@ namespace H15_Projet_E01.Controllers
         // GET: Seances/Create
         public ActionResult Create()
         {
-            //ViewBag.AgentID = new SelectList( unitOfWork.SeanceRepository.get(), "AgentID", "Nom");
            PopulateAgentsDrop();
+           PopulateForfaitsDrop();
             return View();
         }
 
@@ -119,7 +124,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance")] Seance seance)
+        public ActionResult Create([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID")] Seance seance)
         {
             if (ModelState.IsValid)
             {
@@ -130,6 +135,7 @@ namespace H15_Projet_E01.Controllers
             }
 
             PopulateAgentsDrop();
+            PopulateForfaitsDrop();
             return View(seance);
         }
 
@@ -147,6 +153,7 @@ namespace H15_Projet_E01.Controllers
                 return HttpNotFound();
             }
             PopulateAgentsDrop();
+            PopulateForfaitsDrop(seance.ForfaitID);
             return View(seance);
         }
 
@@ -155,7 +162,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance")] Seance seance)
+        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID")] Seance seance)
         {
             if (ModelState.IsValid)
             {
@@ -165,6 +172,7 @@ namespace H15_Projet_E01.Controllers
                 return RedirectToAction("Index");
             }
             PopulateAgentsDrop();
+            PopulateForfaitsDrop();
             return View(seance);
         }
 

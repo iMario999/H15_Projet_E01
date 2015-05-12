@@ -15,9 +15,11 @@ namespace H15_Projet_E01.Models
             [Required]
             public string Nom { get; set; }
             [Required]
+            [Display(Name = "Téléphone")]
             [RegularExpression("\\(\\d{3}\\)-?\\d{3}-\\d{4}", ErrorMessage = "Format doit être (000)000-0000 ou (000)-000-0000")]
             public string Telephone { get; set; }
             [Required]
+            [Display(Name = "Prénom")]
             public string Prenom { get; set; }
             [Required]
             [EmailAddress]
