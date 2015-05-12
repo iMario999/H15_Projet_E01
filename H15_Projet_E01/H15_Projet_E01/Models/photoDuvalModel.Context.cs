@@ -31,5 +31,6 @@ namespace H15_Projet_E01.Models
         public virtual DbSet<Seance> Seances { get; set; }
         public virtual DbSet<Statut> Statuts { get; set; }
         public virtual DbSet<Forfait> Forfaits { get; set; }
+        public virtual DbSet<Facture> Factures { get; set; }
     }
 }

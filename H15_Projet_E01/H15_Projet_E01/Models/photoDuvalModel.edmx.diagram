@@ -17,6 +17,7 @@
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID_Seance" ManuallyRouted="false" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Forfait" Width="1.5" PointX="4.125" PointY="2" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_ForfaitID_SeanceID" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Facture" Width="1.5" PointX="7.625" PointY="0.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

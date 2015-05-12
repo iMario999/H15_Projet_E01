@@ -17,6 +17,14 @@
           <Property Name="Agence" Type="varchar" MaxLength="50" />
           <Property Name="Commentaire" Type="varchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="FactureID" />
+          </Key>
+          <Property Name="FactureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeanceID" Type="int" Nullable="false" />
+          <Property Name="ForfaitID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Forfait">
           <Key>
             <PropertyRef Name="ForfaitID" />
@@ -24,7 +32,7 @@
           <Property Name="ForfaitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Prix" Type="int" Nullable="false" />
+          <Property Name="Prix" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Notifications">
           <Key>
@@ -144,6 +152,7 @@
         </Association>
         <EntityContainer Name="H15_PROJET_E01ModelStoreContainer">
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forfait" EntityType="Self.Forfait" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photographe" EntityType="Self.Photographe" Schema="dbo" store:Type="Tables" />
@@ -336,6 +345,7 @@
             <End Role="Forfait" EntitySet="Forfaits" />
             <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
+          <EntitySet Name="Factures" EntityType="H15_PROJET_E01Model.Facture" />
         </EntityContainer>
         <EntityType Name="Forfait">
           <Key>
@@ -359,6 +369,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="FactureID" />
+          </Key>
+          <Property Name="FactureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeanceID" Type="Int32" Nullable="false" />
+          <Property Name="ForfaitID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -429,6 +447,15 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="ForfaitID" ColumnName="ForfaitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factures">
+            <EntityTypeMapping TypeName="H15_PROJET_E01Model.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="ForfaitID" ColumnName="ForfaitID" />
+                <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
+                <ScalarProperty Name="FactureID" ColumnName="FactureID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
