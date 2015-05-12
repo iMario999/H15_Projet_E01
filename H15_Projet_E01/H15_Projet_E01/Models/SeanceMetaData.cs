@@ -25,7 +25,6 @@ namespace H15_Projet_E01.Models
             [Required]
             public string Commentaire { get; set; }
             public int AgentID { get; set; }
-            public string FactureID { get; set; }
             [DataType(DataType.Time)]
             public Nullable<System.DateTime> HeureSeance { get; set; }
             
