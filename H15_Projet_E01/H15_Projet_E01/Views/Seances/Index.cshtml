@@ -49,9 +49,6 @@
         <th>
             Forfait
         </th> 
-        <th>
-            FactureId
-        </th> 
 
         <th>
             @Html.ActionLink("Agent", "Index", new { sortOrder = ViewBag.AgentSortParm, currentFilter = ViewBag.CurrentFilter, currentAttente = ViewBag.CurrentAttente })
@@ -95,9 +92,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Forfait.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FactureID)
         </td>
       
         <td>
