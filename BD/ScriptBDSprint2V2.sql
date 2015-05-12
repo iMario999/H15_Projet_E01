@@ -93,6 +93,7 @@ WHERE SeanceID = 6
 
 GO
 
+
 CREATE TRIGGER dbo.trgSeanceStatutUpdate 
 ON dbo.Seance 
 AFTER UPDATE 
@@ -123,6 +124,10 @@ IF(UPDATE([StatutID]))
 			BEGIN
 				/*SI LES PHOTOS DE LA SÉANCE SONT TÉLÉCHARGÉ PAR LE CLIENT  */
 				/* A FAIRE CRÉATION DE LA FACTURE DU CLIENT  */
+				DECLARE @ForfaitID int = (SELECT ForfaitID FROM inserted) 
+
+				INSERT INTO dbo.Facture(SeanceID, ForfaitID)
+				VALUES(@SeanceID, @ForfaitID)
 
 				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
 				VALUES (@SeanceID,6,GETDATE()) 
@@ -145,28 +150,24 @@ WHERE SeanceID = 4
 
 GO
 
+DROP TABLE dbo.Facture 
+
+ALTER TABLE dbo.Seance 
+DROP CONSTRAINT FK_SeanceFactureID
+
+
 CREATE TABLE dbo.Facture 
 (
-	FactureID int IDENTITY(1,1) PRIMARY KEY ,
-	SeanceID int NOT NULL, 
+	SeanceID int NOT NULL IDENTITY(1,1) PRIMARY KEY ,
 	ForfaitID int NOT NULL
 )
 
-ALTER TABLE [dbo].[Seance]
-ALTER COLUMN [FactureID] int NULL 
 
 ALTER TABLE dbo.Facture
-ADD CONSTRAINT FK_Facture_ForfaitID FOREIGN KEY (ForfaitID) REFERENCES dbo.Forfait (ForfaitID) 
-
-ALTER TABLE dbo.Seance
-ADD CONSTRAINT FK_SeanceFactureID FOREIGN KEY (FactureID) REFERENCES dbo.Facture (FactureID)
-
-go
-ALTER TABLE dbo.Facture
-ALTER COLUMN Prix decimal(10,2) NOT NULL 
+ADD CONSTRAINT FK_SeanceFactureID  FOREIGN KEY (SeanceID) REFERENCES dbo.Seance (SeanceID)
 
 
 
-/*CREATE VIEW dbo.viewFactureClient 
-AS 
-SELECT */
+
+
+
