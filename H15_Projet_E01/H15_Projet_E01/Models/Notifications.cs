@@ -12,7 +12,7 @@ namespace H15_Projet_E01.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Notification
+    public partial class Notifications
     {
         public int NotificationID { get; set; }
         public Nullable<int> SeanceID { get; set; }

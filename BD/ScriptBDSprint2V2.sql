@@ -152,5 +152,13 @@ CREATE TABLE dbo.Facture
 )
 
 
-ALTER TABLE dbo.Forfait
+ALTER TABLE dbo.Facture
+ADD CONSTRAINT FK_ForfaitID_Seance FOREIGN KEY  
+
 ALTER COLUMN Prix decimal(10,2) NOT NULL 
+
+ALTER TABLE dbo.Facture 
+
+/*CREATE VIEW dbo.viewFactureClient 
+AS 
+SELECT */

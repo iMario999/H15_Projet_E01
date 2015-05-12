@@ -16,7 +16,7 @@ namespace H15_Projet_E01.Models
     {
         public Seance()
         {
-            this.Notifications = new HashSet<Notification>();
+            this.Notifications = new HashSet<Notifications>();
         }
     
         public int SeanceID { get; set; }
@@ -33,9 +33,9 @@ namespace H15_Projet_E01.Models
         public int ForfaitID { get; set; }
     
         public virtual Agent Agent { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual Forfait Forfait { get; set; }
+        public virtual ICollection<Notifications> Notifications { get; set; }
         public virtual Photographe Photographe { get; set; }
         public virtual Statut Statut { get; set; }
-        public virtual Forfait Forfait { get; set; }
     }
 }

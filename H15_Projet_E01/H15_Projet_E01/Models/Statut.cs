@@ -16,14 +16,14 @@ namespace H15_Projet_E01.Models
     {
         public Statut()
         {
-            this.Notifications = new HashSet<Notification>();
-            this.Seances = new HashSet<Seance>();
+            this.Notifications = new HashSet<Notifications>();
+            this.Seance = new HashSet<Seance>();
         }
     
         public int StatutID { get; set; }
         public string Nom { get; set; }
     
-        public virtual ICollection<Notification> Notifications { get; set; }
-        public virtual ICollection<Seance> Seances { get; set; }
+        public virtual ICollection<Notifications> Notifications { get; set; }
+        public virtual ICollection<Seance> Seance { get; set; }
     }
 }
