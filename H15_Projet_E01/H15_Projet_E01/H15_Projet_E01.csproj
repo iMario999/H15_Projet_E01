@@ -143,42 +143,45 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Agent.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AgentMetaData.cs" />
     <Compile Include="Models\Facture.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Forfait.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhotoDuvalModel.Context.cs">
+    <Compile Include="Models\PhotoDuval.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhotoDuvalModel.Context.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhotoDuvalModel.cs">
+    <Compile Include="Models\PhotoDuval.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhotoDuvalModel.Designer.cs">
+    <Compile Include="Models\PhotoDuval.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
+      <DependentUpon>PhotoDuval.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Photographe.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Seance.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeanceMetaData.cs" />
     <Compile Include="Models\Statut.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regle_Affaire\DateValidate.cs" />
@@ -194,22 +197,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\PhotoDuvalModel.edmx">
+    <EntityDeploy Include="Models\PhotoDuval.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PhotoDuvalModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>PhotoDuval.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\PhotoDuvalModel.Context.tt">
+    <Content Include="Models\PhotoDuval.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
-      <LastGenOutput>PhotoDuvalModel.Context.cs</LastGenOutput>
+      <DependentUpon>PhotoDuval.edmx</DependentUpon>
+      <LastGenOutput>PhotoDuval.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PhotoDuvalModel.edmx.diagram">
-      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
+    <Content Include="Models\PhotoDuval.edmx.diagram">
+      <DependentUpon>PhotoDuval.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\PhotoDuvalModel.tt">
+    <Content Include="Models\PhotoDuval.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PhotoDuvalModel.edmx</DependentUpon>
-      <LastGenOutput>PhotoDuvalModel.cs</LastGenOutput>
+      <DependentUpon>PhotoDuval.edmx</DependentUpon>
+      <LastGenOutput>PhotoDuval.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

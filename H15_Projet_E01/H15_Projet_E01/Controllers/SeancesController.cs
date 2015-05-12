@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using H15_Projet_E01.Models;
 using H15_Projet_E01.DAL;
 using PagedList;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace H15_Projet_E01.Controllers
 {
@@ -162,14 +164,43 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID")] Seance seance)
+        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID, StatutID, RowVersion")] Seance seance)
         {
+            /*
             if (ModelState.IsValid)
             {
-                seance.StatutID = 1; 
                 unitOfWork.SeanceRepository.UpdateSeance(seance);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
+            }
+            return View(seance);
+            */
+
+            Seance seanceModif = unitOfWork.SeanceRepository.GetSeanceByID(seance.SeanceID);
+            if (TryUpdateModel(seanceModif, new string[]{"SeanceID","DateSeance","Adresse","Ville","Telephone","Commentaire","AgentID","FactureID","HeureSeance","ForfaitID","StatutID", "RowVersion"}))
+            {
+                unitOfWork.SeanceRepository.UpdateSeance(seanceModif);
+                try{
+                    unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    RecupereErreurValidation(ex);
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    var entry = ex.Entries.Single();
+                    RecupererErreurUpdate(ex);
+                }
+                catch (DbUpdateException ex)
+                {
+                   // RecupereErreurValidation(ex);
+                    //erreur lors de la modification de la BD
+                    ModelState.AddModelError("DbUpdateException",ex.Message);
+                         
+                }
+                     
             }
             PopulateAgentsDrop();
             PopulateForfaitsDrop();
@@ -212,5 +243,53 @@ namespace H15_Projet_E01.Controllers
             }
             base.Dispose(disposing);
         }
+        private void RecupereErreurValidation(DbEntityValidationException ex)
+        {
+            foreach (var erreur in ex.EntityValidationErrors)
+            {
+                //var message = erreur.Entry.Entity.GetType();
+                foreach (var validationErreur in erreur.ValidationErrors)
+                {
+                    ModelState.AddModelError("", validationErreur.ErrorMessage);
+                }
+            }
+
+        }
+
+        //Pour les messages en cas d'accès concurrents 
+        private void RecupererErreurUpdate(DbUpdateConcurrencyException ex)
+        {
+            ModelState.AddModelError("", ex.Message);
+            var entry = ex.Entries.Single();
+            var seanceValues = (Seance)entry.Entity;
+            var databaseValues = (Seance)entry.GetDatabaseValues().ToObject();
+            if (databaseValues == null)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. The department was deleted by another user.");
+            }
+            else
+            {
+
+                if (databaseValues.DateSeance != seanceValues.DateSeance)
+                    ModelState.AddModelError("DateSeance", "Current value: " + databaseValues.DateSeance);
+                if (databaseValues.HeureSeance != seanceValues.HeureSeance)
+                    ModelState.AddModelError("HeureSeance", "Current value: " + databaseValues.HeureSeance);
+                if (databaseValues.Adresse != seanceValues.Adresse)
+                    ModelState.AddModelError("Adresse", "Current value: " + databaseValues.Adresse);
+                if (databaseValues.Ville != seanceValues.Ville)
+                    ModelState.AddModelError("Ville", "Current value: " + databaseValues.Ville);
+                if (databaseValues.Telephone != seanceValues.Telephone)
+                    ModelState.AddModelError("Telephone", "Current value: " + databaseValues.Telephone);
+                if (databaseValues.Commentaire != seanceValues.Commentaire)
+                    ModelState.AddModelError("Commentaire", "Current value: " + databaseValues.Commentaire);
+                if (databaseValues.Forfait != seanceValues.Forfait)
+                    ModelState.AddModelError("Forfait", "Current value: " + databaseValues.Forfait.Nom);
+                if (databaseValues.Agent != seanceValues.Agent)
+                    ModelState.AddModelError("Agent", "Current value: " + databaseValues.Agent.Nom);
+                if (databaseValues.Statut != seanceValues.Statut)
+                    ModelState.AddModelError("Statut", "Current value: " + databaseValues.Statut.Nom);
+            }
+        }
+
     }
 }
