@@ -4,17 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a98bebf872af4e5fb56ee46abd4e9dae" Name="Diagram1">
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Agent" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Notification" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Photographe" Width="1.5" PointX="3.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Seance" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Statut" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="a98bebf872af4e5fb56ee46abd4e9dae" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Agent" Width="1.5" PointX="10" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Notification" Width="1.5" PointX="4.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Photographe" Width="1.5" PointX="10.125" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Seance" Width="1.5" PointX="7.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Statut" Width="1.5" PointX="4.375" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_AgentID_SeanceID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_SeanceID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_Seance_PhotographeID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID_Seance" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Forfait" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="H15_PROJET_E01Model.FK_ForfaitID_SeanceID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,7 +15,7 @@ namespace H15_Projet_E01.Models
             [Required]
             public string Nom { get; set; }
             [Required]
-            [RegularExpression("\\(\\d{3}\\)-?\\d{3}-\\d{4}", ErrorMessage = "Le numéro de téléphone doit être être sous le format (514)-123-4567 ou (514)789-0000")]
+            [RegularExpression("\\(\\d{3}\\)-?\\d{3}-\\d{4}", ErrorMessage = "Format doit être (000)000-0000 ou (000)-000-0000")]
             public string Telephone { get; set; }
             [Required]
             public string Prenom { get; set; }
