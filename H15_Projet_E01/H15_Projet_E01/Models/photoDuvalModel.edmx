@@ -34,7 +34,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Prix" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
-        <EntityType Name="Notifications">
+        <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="NotificationID" />
           </Key>
@@ -114,12 +114,12 @@
           <End Role="Seance" Type="Self.Seance" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seance">
               <PropertyRef Name="SeanceID" />
             </Principal>
-            <Dependent Role="Notifications">
+            <Dependent Role="Notification">
               <PropertyRef Name="SeanceID" />
             </Dependent>
           </ReferentialConstraint>
@@ -128,12 +128,12 @@
           <End Role="Statut" Type="Self.Statut" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statut">
               <PropertyRef Name="StatutID" />
             </Principal>
-            <Dependent Role="Notifications">
+            <Dependent Role="Notification">
               <PropertyRef Name="StatutID" />
             </Dependent>
           </ReferentialConstraint>
@@ -154,7 +154,7 @@
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forfait" EntityType="Self.Forfait" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photographe" EntityType="Self.Photographe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seance" EntityType="Self.Seance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statut" EntityType="Self.Statut" Schema="dbo" store:Type="Tables" />
@@ -172,11 +172,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_SeanceID" Association="Self.FK_SeanceID">
             <End Role="Seance" EntitySet="Seance" />
-            <End Role="Notifications" EntitySet="Notifications" />
+            <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
           <AssociationSet Name="FK_StatutID" Association="Self.FK_StatutID">
             <End Role="Statut" EntitySet="Statut" />
-            <End Role="Notifications" EntitySet="Notifications" />
+            <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
           <AssociationSet Name="FK_StatutID_Seance" Association="Self.FK_StatutID_Seance">
             <End Role="Statut" EntitySet="Statut" />
@@ -227,8 +227,8 @@
           <Property Name="SeanceID" Type="Int32" />
           <Property Name="StatutID" Type="Int32" Nullable="false" />
           <Property Name="DateNotification" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Seance" Relationship="Self.FK_SeanceID" FromRole="Notifications" ToRole="Seance" />
-          <NavigationProperty Name="Statut" Relationship="Self.FK_StatutID" FromRole="Notifications" ToRole="Statut" />
+          <NavigationProperty Name="Seance" Relationship="Self.FK_SeanceID" FromRole="Notification" ToRole="Seance" />
+          <NavigationProperty Name="Statut" Relationship="Self.FK_StatutID" FromRole="Notification" ToRole="Statut" />
         </EntityType>
         <EntityType Name="Photographe">
           <Key>
@@ -256,7 +256,7 @@
           <Property Name="ForfaitID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agent" Relationship="Self.FK_AgentID_SeanceID" FromRole="Seance" ToRole="Agent" />
           <NavigationProperty Name="Forfait" Relationship="Self.FK_ForfaitID_SeanceID" FromRole="Seance" ToRole="Forfait" />
-          <NavigationProperty Name="Notifications" Relationship="Self.FK_SeanceID" FromRole="Seance" ToRole="Notifications" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_SeanceID" FromRole="Seance" ToRole="Notification" />
           <NavigationProperty Name="Photographe" Relationship="Self.FK_Seance_PhotographeID" FromRole="Seance" ToRole="Photographe" />
           <NavigationProperty Name="Statut" Relationship="Self.FK_StatutID_Seance" FromRole="Seance" ToRole="Statut" />
         </EntityType>
@@ -266,7 +266,7 @@
           </Key>
           <Property Name="StatutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Notifications" Relationship="Self.FK_StatutID" FromRole="Statut" ToRole="Notifications" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_StatutID" FromRole="Statut" ToRole="Notification" />
           <NavigationProperty Name="Seances" Relationship="Self.FK_StatutID_Seance" FromRole="Statut" ToRole="Seance" />
         </EntityType>
         <Association Name="FK_AgentID_SeanceID">
@@ -297,12 +297,12 @@
           <End Role="Seance" Type="Self.Seance" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seance">
               <PropertyRef Name="SeanceID" />
             </Principal>
-            <Dependent Role="Notifications">
+            <Dependent Role="Notification">
               <PropertyRef Name="SeanceID" />
             </Dependent>
           </ReferentialConstraint>
@@ -311,12 +311,12 @@
           <End Role="Statut" Type="Self.Statut" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statut">
               <PropertyRef Name="StatutID" />
             </Principal>
-            <Dependent Role="Notifications">
+            <Dependent Role="Notification">
               <PropertyRef Name="StatutID" />
             </Dependent>
           </ReferentialConstraint>
@@ -363,11 +363,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_SeanceID" Association="Self.FK_SeanceID">
             <End Role="Seance" EntitySet="Seances" />
-            <End Role="Notifications" EntitySet="Notifications" />
+            <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_StatutID" Association="Self.FK_StatutID">
             <End Role="Statut" EntitySet="Statuts" />
-            <End Role="Notifications" EntitySet="Notifications" />
+            <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_Seance_PhotographeID" Association="Self.FK_Seance_PhotographeID">
             <End Role="Photographe" EntitySet="Photographes" />
@@ -418,7 +418,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Notification">
-              <MappingFragment StoreEntitySet="Notifications">
+              <MappingFragment StoreEntitySet="Notification">
                 <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
                 <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
                 <ScalarProperty Name="StatutID" ColumnName="StatutID" />

@@ -152,7 +152,7 @@
     <Compile Include="Models\Forfait.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Notifications.cs">
+    <Compile Include="Models\Notification.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotoDuvalModel.Context.cs">
