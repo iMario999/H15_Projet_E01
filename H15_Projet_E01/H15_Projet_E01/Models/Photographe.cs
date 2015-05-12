@@ -16,12 +16,12 @@ namespace H15_Projet_E01.Models
     {
         public Photographe()
         {
-            this.Seance = new HashSet<Seance>();
+            this.Seances = new HashSet<Seance>();
         }
     
         public int PhotographeID { get; set; }
         public string Nom { get; set; }
     
-        public virtual ICollection<Seance> Seance { get; set; }
+        public virtual ICollection<Seance> Seances { get; set; }
     }
 }

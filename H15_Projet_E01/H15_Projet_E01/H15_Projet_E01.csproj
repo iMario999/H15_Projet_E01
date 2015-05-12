@@ -146,10 +146,13 @@
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AgentMetaData.cs" />
+    <Compile Include="Models\Facture.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Forfait.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Notification.cs">
+    <Compile Include="Models\Notifications.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotoDuvalModel.Context.cs">

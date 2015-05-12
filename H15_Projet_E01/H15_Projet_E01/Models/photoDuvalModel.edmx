@@ -199,7 +199,7 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Agence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Commentaire" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Seance" Relationship="Self.FK_AgentID_SeanceID" FromRole="Agent" ToRole="Seance" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_AgentID_SeanceID" FromRole="Agent" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Facture">
           <Key>
@@ -217,9 +217,9 @@
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Prix" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Seance" Relationship="Self.FK_ForfaitID_SeanceID" FromRole="Forfait" ToRole="Seance" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_ForfaitID_SeanceID" FromRole="Forfait" ToRole="Seance" />
         </EntityType>
-        <EntityType Name="Notifications">
+        <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="NotificationID" />
           </Key>
@@ -236,7 +236,7 @@
           </Key>
           <Property Name="PhotographeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Seance" Relationship="Self.FK_Seance_PhotographeID" FromRole="Photographe" ToRole="Seance" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_Seance_PhotographeID" FromRole="Photographe" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Seance">
           <Key>
@@ -267,7 +267,7 @@
           <Property Name="StatutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Notifications" Relationship="Self.FK_StatutID" FromRole="Statut" ToRole="Notifications" />
-          <NavigationProperty Name="Seance" Relationship="Self.FK_StatutID_Seance" FromRole="Statut" ToRole="Seance" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_StatutID_Seance" FromRole="Statut" ToRole="Seance" />
         </EntityType>
         <Association Name="FK_AgentID_SeanceID">
           <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
@@ -297,7 +297,7 @@
           <End Role="Seance" Type="Self.Seance" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seance">
               <PropertyRef Name="SeanceID" />
@@ -311,7 +311,7 @@
           <End Role="Statut" Type="Self.Statut" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statut">
               <PropertyRef Name="StatutID" />
@@ -346,36 +346,36 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="H15_PROJET_E01Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Agent" EntityType="Self.Agent" />
-          <EntitySet Name="Facture" EntityType="Self.Facture" />
-          <EntitySet Name="Forfait" EntityType="Self.Forfait" />
-          <EntitySet Name="Notifications" EntityType="Self.Notifications" />
-          <EntitySet Name="Photographe" EntityType="Self.Photographe" />
-          <EntitySet Name="Seance" EntityType="Self.Seance" />
-          <EntitySet Name="Statut" EntityType="Self.Statut" />
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Factures" EntityType="Self.Facture" />
+          <EntitySet Name="Forfaits" EntityType="Self.Forfait" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Photographes" EntityType="Self.Photographe" />
+          <EntitySet Name="Seances" EntityType="Self.Seance" />
+          <EntitySet Name="Statuts" EntityType="Self.Statut" />
           <AssociationSet Name="FK_AgentID_SeanceID" Association="Self.FK_AgentID_SeanceID">
-            <End Role="Agent" EntitySet="Agent" />
-            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
           <AssociationSet Name="FK_ForfaitID_SeanceID" Association="Self.FK_ForfaitID_SeanceID">
-            <End Role="Forfait" EntitySet="Forfait" />
-            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Forfait" EntitySet="Forfaits" />
+            <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
           <AssociationSet Name="FK_SeanceID" Association="Self.FK_SeanceID">
-            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Seance" EntitySet="Seances" />
             <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_StatutID" Association="Self.FK_StatutID">
-            <End Role="Statut" EntitySet="Statut" />
+            <End Role="Statut" EntitySet="Statuts" />
             <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_Seance_PhotographeID" Association="Self.FK_Seance_PhotographeID">
-            <End Role="Photographe" EntitySet="Photographe" />
-            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Photographe" EntitySet="Photographes" />
+            <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
           <AssociationSet Name="FK_StatutID_Seance" Association="Self.FK_StatutID_Seance">
-            <End Role="Statut" EntitySet="Statut" />
-            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Statut" EntitySet="Statuts" />
+            <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -384,7 +384,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="H15_PROJET_E01ModelStoreContainer" CdmEntityContainer="H15_PROJET_E01Entities1">
-          <EntitySetMapping Name="Agent">
+          <EntitySetMapping Name="Agents">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Agent">
               <MappingFragment StoreEntitySet="Agent">
                 <ScalarProperty Name="AgentID" ColumnName="AgentID" />
@@ -397,7 +397,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Facture">
+          <EntitySetMapping Name="Factures">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Facture">
               <MappingFragment StoreEntitySet="Facture">
                 <ScalarProperty Name="FactureID" ColumnName="FactureID" />
@@ -406,7 +406,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Forfait">
+          <EntitySetMapping Name="Forfaits">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Forfait">
               <MappingFragment StoreEntitySet="Forfait">
                 <ScalarProperty Name="ForfaitID" ColumnName="ForfaitID" />
@@ -417,7 +417,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="H15_PROJET_E01Model.Notifications">
+            <EntityTypeMapping TypeName="H15_PROJET_E01Model.Notification">
               <MappingFragment StoreEntitySet="Notifications">
                 <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
                 <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
@@ -426,7 +426,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Photographe">
+          <EntitySetMapping Name="Photographes">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Photographe">
               <MappingFragment StoreEntitySet="Photographe">
                 <ScalarProperty Name="PhotographeID" ColumnName="PhotographeID" />
@@ -434,7 +434,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Seance">
+          <EntitySetMapping Name="Seances">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Seance">
               <MappingFragment StoreEntitySet="Seance">
                 <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
@@ -452,7 +452,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Statut">
+          <EntitySetMapping Name="Statuts">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Statut">
               <MappingFragment StoreEntitySet="Statut">
                 <ScalarProperty Name="StatutID" ColumnName="StatutID" />
@@ -474,7 +474,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
