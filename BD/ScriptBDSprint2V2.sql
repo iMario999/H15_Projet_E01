@@ -142,3 +142,15 @@ UPDATE dbo.Seance
 SET StatutID = 6
 WHERE SeanceID = 4
 
+GO
+
+CREATE TABLE dbo.Facture 
+(
+	FactureID int IDENTITY(1,1) PRIMARY KEY ,
+	SeanceID int NOT NULL, 
+	ForfaitID int NOT NULL
+)
+
+
+ALTER TABLE dbo.Forfait
+ALTER COLUMN Prix decimal(10,2) NOT NULL 

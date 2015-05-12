@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a98bebf872af4e5fb56ee46abd4e9dae" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Agent" Width="1.5" PointX="10" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Notification" Width="1.5" PointX="4.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Notification" Width="1.5" PointX="2" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Photographe" Width="1.5" PointX="10.125" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Seance" Width="1.5" PointX="7.375" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Statut" Width="1.5" PointX="4.375" PointY="5.875" IsExpanded="true" />
@@ -15,7 +15,7 @@
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_Seance_PhotographeID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID_Seance" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Forfait" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Forfait" Width="1.5" PointX="4.125" PointY="2" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_ForfaitID_SeanceID" />
       </Diagram>
     </edmx:Diagrams>
