@@ -4,21 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Agent</h4>
+    <h1>Agent : @Html.DisplayFor(model => model.Nom)</h1>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-
-    </dl>
 </div>
 
 
@@ -34,6 +22,7 @@
             <th># telephone</th>
             <th>Commentaire</th>
             <th>Forfait</th>
+            <th>Statut</th>
         </tr>
 
         @foreach (var seance in Model.Seances)
@@ -47,6 +36,7 @@
                     <td>@Html.DisplayFor(modelItem => seance.Telephone)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Commentaire)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Forfait.Nom)</td>
+                    <td>@Html.DisplayFor(modelItem => seance.Statut.Nom)</td>
                 </tr>
             }
 

@@ -31,7 +31,7 @@ namespace H15_Projet_E01.Controllers
             Agent agent = unitOfWork.AgentRepository.GetAgentByID(id);
             if (seanceId != null)
             {
-                ViewBag.Notifications = unitOfWork.NotificationRepository.GetNotificationsBySeanceId(seanceId);
+                ViewBag.Notifications = unitOfWork.NotificationRepository.GetNotificationsBySeanceId(seanceId).OrderByDescending(n => n.DateNotification);
             }
             if (agent == null)
             {
