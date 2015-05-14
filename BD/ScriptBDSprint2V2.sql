@@ -232,4 +232,13 @@ END
 GO		
 
 
-	
+UPDATE dbo.Seance
+SET [NbPhotosPrise] = 4
+WHERE SeanceID = 2
+
+INSERT INTO dbo.Photo (SeanceID)
+VALUES (2),(2),(2),(2) 
+
+UPDATE dbo.Seance
+SET [DateFacturation] = GETDATE()
+WHERE SeanceID = 2

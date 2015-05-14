@@ -25,13 +25,13 @@ namespace H15_Projet_E01.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Agent> Agent { get; set; }
-        public virtual DbSet<Facture> Facture { get; set; }
-        public virtual DbSet<Forfait> Forfait { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
-        public virtual DbSet<Photo> Photo { get; set; }
-        public virtual DbSet<Photographe> Photographe { get; set; }
-        public virtual DbSet<Seance> Seance { get; set; }
-        public virtual DbSet<Statut> Statut { get; set; }
+        public virtual DbSet<Agent> Agents { get; set; }
+        public virtual DbSet<Facture> Factures { get; set; }
+        public virtual DbSet<Forfait> Forfaits { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<Photographe> Photographes { get; set; }
+        public virtual DbSet<Seance> Seances { get; set; }
+        public virtual DbSet<Statut> Statuts { get; set; }
     }
 }
