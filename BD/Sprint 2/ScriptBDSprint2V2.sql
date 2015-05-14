@@ -57,9 +57,11 @@ BEGIN
 IF(UPDATE([DateSeance]))
 	BEGIN 
 
-		DECLARE @VielleDate datetime = (SELECT DateSeance FROM deleted)   
+		DECLARE @VielleDate datetime = (SELECT DateSeance FROM deleted) 
+		DECLARE @DateAjouter datetime = (SELECT DateSeance FROM inserted)   
 		DECLARE @SeanceID int = (SELECT SeanceID FROM inserted) 
-
+		IF(@DateAjouter != NULL)
+		BEGIN
 		IF( @VielleDate IS NULL)
 			BEGIN  
 			
@@ -84,6 +86,7 @@ IF(UPDATE([DateSeance]))
 			END
 	END
 END 
+END
 GO 
 
 UPDATE dbo.Seance
@@ -171,8 +174,10 @@ BEGIN
 
 DECLARE @SeanceID int 
 DECLARE @StatutID int 
-SELECT @SeanceID = SeanceID, @StatutID = StatutID FROM inserted
-
+DECLARE @NbPhotos int 
+SELECT @SeanceID = SeanceID, @StatutID = StatutID, @NbPhotos = NbPhotosPrise FROM inserted
+IF(@NbPhotos != NULL )
+BEGIN
 IF(UPDATE(NbPhotosPrise))
 	BEGIN
 		IF(@StatutID < 4)
@@ -186,7 +191,7 @@ IF(UPDATE(NbPhotosPrise))
 		END
 	END 
 END
-
+END
 GO
 
 ALTER TABLE dbo.Seance
@@ -203,7 +208,14 @@ BEGIN
 
 DECLARE @SeanceID int 
 DECLARE @StatutID int 
-SELECT @SeanceID = SeanceID, @StatutID = StatutID FROM inserted
+DECLARE	@DateFacturation datetime 
+
+
+
+SELECT @SeanceID = SeanceID, @StatutID = StatutID, @DateFacturation =  DateFacturation FROM inserted
+
+IF(@DateFacturation != NULL)
+BEGIN
 
 IF(UPDATE(DateFacturation))
 	BEGIN
@@ -227,7 +239,7 @@ IF(UPDATE(DateFacturation))
 	END
 
 END 
-
+END
 GO		
 
 
