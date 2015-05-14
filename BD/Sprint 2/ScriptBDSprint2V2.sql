@@ -60,7 +60,7 @@ IF(UPDATE([DateSeance]))
 		DECLARE @VielleDate datetime = (SELECT DateSeance FROM deleted) 
 		DECLARE @DateAjouter datetime = (SELECT DateSeance FROM inserted)   
 		DECLARE @SeanceID int = (SELECT SeanceID FROM inserted) 
-		IF(@DateAjouter != NULL)
+		IF(@DateAjouter IS NOT NULL)
 		BEGIN
 		IF( @VielleDate IS NULL)
 			BEGIN  
