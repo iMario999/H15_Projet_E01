@@ -98,8 +98,6 @@ WHERE SeanceID = 6
 GO
 
 
-ALTER TABLE dbo.Seance 
-DROP CONSTRAINT FK_SeanceFactureID
 
 
 CREATE TABLE dbo.Facture 
@@ -110,7 +108,8 @@ CREATE TABLE dbo.Facture
 
 
 ALTER TABLE dbo.Facture
-ADD CONSTRAINT FK_SeanceFactureID  FOREIGN KEY (SeanceID) REFERENCES dbo.Seance (SeanceID)
+ADD CONSTRAINT FK_SeanceFactureID  FOREIGN KEY (SeanceID) REFERENCES dbo.Seance (SeanceID) 
+
 
 
 
@@ -253,3 +252,24 @@ VALUES (2),(2),(2),(2)
 UPDATE dbo.Seance
 SET [DateFacturation] = GETDATE()
 WHERE SeanceID = 2
+
+GO
+
+CREATE TRIGGER dbo.SupprimeFacture
+ON dbo.Seance
+INSTEAD OF DELETE 
+AS
+BEGIN
+
+DECLARE @SeanceID int 
+
+SELECT @SeanceID = SeanceID From deleted
+
+DELETE FROM dbo.Facture
+WHERE SeanceID = @SeanceID
+
+
+DELETE FROM dbo.Seance
+WHERE SeanceID = @SeanceID
+
+END 
