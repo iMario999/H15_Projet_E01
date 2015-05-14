@@ -21,9 +21,11 @@ namespace H15_Projet_E01.Regle_Affaire
             {
                 if (seance.HeureSeance == null)
                     return new ValidationResult("Vous devez choisir l'heure ou laisser la date vide");
-                if (seance.DateSeance < DateTime.Now)
+                if (seance.DateSeance <= DateTime.Now)
                     return new ValidationResult("La date doit être dans le future");
-               
+                if (seance.DateSeance > DateTime.Now.AddDays(15))
+                    return new ValidationResult("La date ne doit pas être plus loin que d'ici aujourd'hui + 15 jours");
+
                 UnitOfWork unitOfWork = new UnitOfWork();
 
                 foreach (Seance s in unitOfWork.SeanceRepository.GetSeances())
