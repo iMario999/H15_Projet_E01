@@ -20,6 +20,58 @@
 
     </dl>
 </div>
+
+
+
+@if (Model.Seances != null)
+{
+    <h3>Seances:</h3>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th># telephone</th>
+            <th>Commentaire</th>
+            <th>Forfait</th>
+        </tr>
+
+        @foreach (var seance in Model.Seances.Where(s => s.DateSeance.Value.Year > DateTime.Today.Year))
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => seance.DateSeance.Value.Date + " " + seance.HeureSeance.Value.TimeOfDay)</td>
+                <td>@Html.DisplayFor(modelItem => seance.HeureSeance)</td>
+                <td>@Html.DisplayFor(modelItem => seance.Adresse)</td>
+                <td>@Html.DisplayFor(modelItem => seance.Ville)</td>
+                <td>@Html.DisplayFor(modelItem => seance.Telephone)</td>
+                <td>@Html.DisplayFor(modelItem => seance.Commentaire)</td>
+                <td>@Html.DisplayFor(modelItem => seance.Forfait.Nom)</td>
+            </tr>
+
+        }
+    </table>
+}
+
+@if (ViewBag.Notifications != null)
+{
+    <h3>Notifications:</h3>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Statut</th>
+        </tr>
+
+        @foreach (var notif in ViewBag.Notifications)
+        {
+            <tr>
+                <td>@notif.DateNotification</td>
+                <td>@notif.Statut.Nom</td>
+            </tr>
+
+        }
+    </table>
+}
+
 <p>
     @Html.ActionLink("Modifier", "Edit", new { id = Model.AgentID }) |
     @Html.ActionLink("Retour à la liste", "Index")

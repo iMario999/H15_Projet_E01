@@ -22,13 +22,17 @@ namespace H15_Projet_E01.Controllers
         }
 
         // GET: Agents/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? seanceId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Agent agent = unitOfWork.AgentRepository.GetAgentByID(id);
+            if (seanceId != null)
+            {
+                ViewBag.Notifications = unitOfWork.NotificationRepository.GetNotificationsBySeanceId(seanceId);
+            }
             if (agent == null)
             {
                 return HttpNotFound();

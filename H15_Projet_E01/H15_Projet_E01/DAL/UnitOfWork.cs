@@ -13,6 +13,7 @@ namespace H15_Projet_E01.DAL
         private SeanceRepository seanceRepository;
         private AgentRepository agentRepository;
         private ForfaitRepository forfaitRepository;
+        private NotificationRepository notificationRepository;
 
         //======================================================================================
         public SeanceRepository SeanceRepository
@@ -49,6 +50,17 @@ namespace H15_Projet_E01.DAL
                     this.forfaitRepository = new ForfaitRepository(context);
                 }
                 return forfaitRepository;
+            }
+        }
+        public NotificationRepository NotificationRepository
+        {
+            get
+            {
+                if (this.notificationRepository == null)
+                {
+                    this.notificationRepository = new NotificationRepository(context);
+                }
+                return notificationRepository;
             }
         }
         //======================================================================================
