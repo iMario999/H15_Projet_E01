@@ -22,7 +22,8 @@ namespace H15_Projet_E01.Controllers
         private void PopulateAgentsDrop(object selectedType = null)
         {
             var TypeQuery = unitOfWork.AgentRepository.GetAgents();
-            ViewBag.AgentID = new SelectList(TypeQuery, "AgentID", "Nom", selectedType);
+            ViewBag.AgentID = new SelectList(TypeQuery, "AgentID", "Nom",selectedType);
+            
         }
 
         private void PopulateForfaitsDrop(object selectedType = null)
@@ -153,8 +154,9 @@ namespace H15_Projet_E01.Controllers
             if (seance == null)
             {
                 return HttpNotFound();
-            }
-            PopulateAgentsDrop();
+            }           
+            PopulateAgentsDrop(seance.AgentID);
+            ViewBag.AgentID = new SelectList(unitOfWork.AgentRepository.GetAgents(), "AgentID", "Nom", seance.AgentID);
             PopulateForfaitsDrop(seance.ForfaitID);
             return View(seance);
         }
