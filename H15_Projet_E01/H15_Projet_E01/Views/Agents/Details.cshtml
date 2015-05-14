@@ -10,6 +10,42 @@
 </div>
 
 
+<h3>Notifications:</h3>
+@if (ViewBag.Notifications != null && ViewBag.Notifications.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Date de la séance</th>
+            <th>Statut</th>
+        </tr>
+
+        @foreach (var notif in ViewBag.Notifications)
+        {
+            <tr>
+                <td>@notif.DateNotification</td>
+                @if (notif.Seance.DateSeance != null)
+                {
+                    <td>@notif.Seance.DateSeance.ToString("yyyy-MM-dd HH:mm") </td>
+                }
+                else
+                {
+                    <td>En attente</td>
+                }
+                <td>@notif.Statut.Nom</td>
+            </tr>
+
+        }
+    </table>
+}
+else
+{
+    <h4>Aucun notification</h4>
+}
+
+
+
+
 
 @if (Model.Seances != null)
 {
@@ -39,31 +75,14 @@
                     <td>@Html.DisplayFor(modelItem => seance.Statut.Nom)</td>
                 </tr>
             }
-
-
         }
     </table>
 }
-
-@if (ViewBag.Notifications != null)
+else
 {
-    <h3>Notifications:</h3>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Statut</th>
-        </tr>
-
-        @foreach (var notif in ViewBag.Notifications)
-        {
-            <tr>
-                <td>@notif.DateNotification</td>
-                <td>@notif.Statut.Nom</td>
-            </tr>
-
-        }
-    </table>
+    <h4>Aucun séances</h4>
 }
+
 
 <p>
     @Html.ActionLink("Modifier", "Edit", new { id = Model.AgentID }) |

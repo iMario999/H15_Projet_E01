@@ -21,6 +21,10 @@ namespace H15_Projet_E01.DAL
         {
             return Get().Where(n=>n.SeanceID == id);
         }
+        public IEnumerable<Notification> GetNotificationsByAgentID(int? id)
+        {
+            return Get().Where(n => n.Seance.AgentID == id);
+        }
         public void InsertNotification(Notification notification)
         {
             Insert(notification);
