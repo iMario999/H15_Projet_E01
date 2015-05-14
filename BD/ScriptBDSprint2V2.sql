@@ -119,7 +119,7 @@ CREATE TABLE dbo.Photo
 
 GO
 
-
+ 
 
 CREATE TRIGGER dbo.Trg_PhotoAjouter 
 ON dbo.Photo
@@ -186,7 +186,6 @@ IF(UPDATE(NbPhotosPrise))
 		END
 	END 
 END
-
 
 GO
 
