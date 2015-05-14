@@ -26,7 +26,7 @@
 @if (Model.Seances != null)
 {
     <h3>Seances:</h3>
-    <table>
+    <table class="table">
         <tr>
             <th>Date</th>
             <th>Adresse</th>
@@ -36,17 +36,20 @@
             <th>Forfait</th>
         </tr>
 
-        @foreach (var seance in Model.Seances.Where(s => s.DateSeance.Value.Year > DateTime.Today.Year))
+        @foreach (var seance in Model.Seances)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => seance.DateSeance.Value.Date + " " + seance.HeureSeance.Value.TimeOfDay)</td>
-                <td>@Html.DisplayFor(modelItem => seance.HeureSeance)</td>
-                <td>@Html.DisplayFor(modelItem => seance.Adresse)</td>
-                <td>@Html.DisplayFor(modelItem => seance.Ville)</td>
-                <td>@Html.DisplayFor(modelItem => seance.Telephone)</td>
-                <td>@Html.DisplayFor(modelItem => seance.Commentaire)</td>
-                <td>@Html.DisplayFor(modelItem => seance.Forfait.Nom)</td>
-            </tr>
+            if (seance.DateSeance != null && seance.DateSeance.Value.Year == DateTime.Now.Year)
+            {
+                <tr>
+                    <td>@seance.DateSeance.Value.Date.ToString("yyyy-MM-dd") @seance.HeureSeance.Value.TimeOfDay</td>
+                    <td>@Html.DisplayFor(modelItem => seance.Adresse)</td>
+                    <td>@Html.DisplayFor(modelItem => seance.Ville)</td>
+                    <td>@Html.DisplayFor(modelItem => seance.Telephone)</td>
+                    <td>@Html.DisplayFor(modelItem => seance.Commentaire)</td>
+                    <td>@Html.DisplayFor(modelItem => seance.Forfait.Nom)</td>
+                </tr>
+            }
+
 
         }
     </table>
