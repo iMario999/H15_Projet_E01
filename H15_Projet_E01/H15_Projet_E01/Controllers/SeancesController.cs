@@ -136,7 +136,7 @@ namespace H15_Projet_E01.Controllers
                 return RedirectToAction("Index");
             }
 
-            PopulateAgentsDrop();
+            PopulateAgentsDrop(seance.AgentID);
             PopulateForfaitsDrop();
             return View(seance);
         }
