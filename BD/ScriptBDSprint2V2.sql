@@ -91,66 +91,9 @@ SET DateSeance = '20150511'
 WHERE SeanceID = 6  
 
 
-GO
-
-
-CREATE TRIGGER dbo.trgSeanceStatutUpdate 
-ON dbo.Seance 
-AFTER UPDATE 
-AS 
-BEGIN 
-
-IF(UPDATE([StatutID]))
-	BEGIN 
-		DECLARE @NouveauStatutID int = (SELECT StatutID FROM inserted) 
-		DECLARE @SeanceID int = (SELECT SeanceID FROM inserted) 
-
-		IF( @NouveauStatutID = 4)
-			BEGIN  
-			
-				/*SI LA SEANCE EST RÉALISÉE */
-				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
-				VALUES (@SeanceID,4,GETDATE()) 
-
-			END  
-		ELSE IF ( @NouveauStatutID = 5 ) 
-			BEGIN
-				/*SI LA SEANCE EST LIVRÉE */
-				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
-				VALUES (@SeanceID,5,GETDATE()) 
-
-			END
-		ELSE IF (@NouveauStatutID = 6)
-			BEGIN
-				/*SI LES PHOTOS DE LA SÉANCE SONT TÉLÉCHARGÉ PAR LE CLIENT  */
-				/* A FAIRE CRÉATION DE LA FACTURE DU CLIENT  */
-				DECLARE @ForfaitID int = (SELECT ForfaitID FROM inserted) 
-
-				INSERT INTO dbo.Facture(SeanceID, ForfaitID)
-				VALUES(@SeanceID, @ForfaitID)
-
-				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
-				VALUES (@SeanceID,6,GETDATE()) 
-			END 
-	END
-END 
-GO 
-
-UPDATE dbo.Seance
-SET StatutID = 4
-WHERE SeanceID = 4  
-
-UPDATE dbo.Seance
-SET StatutID = 5
-WHERE SeanceID = 4 
-
-UPDATE dbo.Seance
-SET StatutID = 6
-WHERE SeanceID = 4
 
 GO
 
-DROP TABLE dbo.Facture 
 
 ALTER TABLE dbo.Seance 
 DROP CONSTRAINT FK_SeanceFactureID
@@ -168,6 +111,125 @@ ADD CONSTRAINT FK_SeanceFactureID  FOREIGN KEY (SeanceID) REFERENCES dbo.Seance 
 
 
 
+CREATE TABLE dbo.Photo
+(
+	PhotoID int IDENTITY(1,1) PRIMARY KEY,
+	SeanceID int NOT NULL
+)
+
+GO
 
 
 
+CREATE TRIGGER dbo.Trg_PhotoAjouter 
+ON dbo.Photo
+AFTER INSERT  
+AS 
+BEGIN 
+DECLARE  @SeanceID int
+--Statut de la séance ou les photos sont ajoutées 
+DECLARE  @StatutID int 
+
+SELECT @SeanceID = SeanceID  FROM inserted
+SELECT @StatutID = StatutID FROM dbo.Seance WHERE SeanceID = @SeanceID 
+
+IF(@StatutID < 5)
+	BEGIN
+		
+		UPDATE dbo.Seance
+		SET StatutID = 5
+		WHERE SeanceID = @SeanceID
+
+		INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
+				VALUES (@SeanceID,5,GETDATE()) 
+
+	END 
+--Fin du trigger 
+END 
+
+GO 
+
+
+
+--TEST du trigger ajouter photo 
+
+INSERT INTO dbo.Photo (SeanceID)
+VALUES (1),(1),(1),(1) 
+
+
+ALTER TABLE dbo.Seance
+ADD NbPhotosPrise int NULL 
+
+
+-- TRIGGER photo prises 
+GO
+CREATE TRIGGER dbo.Trg_photoPrise
+ON dbo.Seance
+AFTER UPDATE 
+AS 
+BEGIN 
+
+DECLARE @SeanceID int 
+DECLARE @StatutID int 
+SELECT @SeanceID = SeanceID, @StatutID = StatutID FROM inserted
+
+IF(UPDATE(NbPhotosPrise))
+	BEGIN
+		IF(@StatutID < 4)
+		BEGIN
+			UPDATE dbo.Seance
+			SET StatutID = 4
+			WHERE SeanceID= @SeanceID
+		
+			INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
+			VALUES (@SeanceID,4,GETDATE()) 
+		END
+	END 
+END
+
+
+GO
+
+ALTER TABLE dbo.Seance
+ADD DateFacturation DateTime NULL 
+
+--Trigger Seance Facturé 
+GO
+
+CREATE TRIGGER dbo.Trg_DateFacturationUpdate 
+ON dbo.Seance
+AFTER UPDATE
+AS
+BEGIN 
+
+DECLARE @SeanceID int 
+DECLARE @StatutID int 
+SELECT @SeanceID = SeanceID, @StatutID = StatutID FROM inserted
+
+IF(UPDATE(DateFacturation))
+	BEGIN
+		IF(@StatutID < 6)
+			BEGIN
+				DECLARE @ForfaitID int = (SELECT ForfaitID FROM inserted) 
+
+				UPDATE dbo.Seance
+				SET StatutID = 6
+				WHERE SeanceID = @SeanceID
+
+				SET IDENTITY_INSERT dbo.Facture  ON 
+				INSERT INTO dbo.Facture(SeanceID, ForfaitID) 
+				VALUES(@SeanceID, @ForfaitID)
+				SET IDENTITY_INSERT dbo.Facture  OFF
+
+
+				INSERT INTO dbo.Notification(SeanceID, StatutID, DateNotification )
+				VALUES (@SeanceID,6,GETDATE())
+			END
+	END
+
+END 
+
+GO		
+
+
+	

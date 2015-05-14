@@ -16,7 +16,7 @@ namespace H15_Projet_E01.Models
     {
         public Seance()
         {
-            this.Notifications = new HashSet<Notification>();
+            this.Notification = new HashSet<Notification>();
         }
     
         public int SeanceID { get; set; }
@@ -30,11 +30,13 @@ namespace H15_Projet_E01.Models
         public Nullable<int> PhotographeID { get; set; }
         public int StatutID { get; set; }
         public int ForfaitID { get; set; }
+        public Nullable<int> NbPhotosPrise { get; set; }
+        public Nullable<System.DateTime> DateFacturation { get; set; }
     
         public virtual Agent Agent { get; set; }
         public virtual Facture Facture { get; set; }
         public virtual Forfait Forfait { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Notification> Notification { get; set; }
         public virtual Photographe Photographe { get; set; }
         public virtual Statut Statut { get; set; }
     }

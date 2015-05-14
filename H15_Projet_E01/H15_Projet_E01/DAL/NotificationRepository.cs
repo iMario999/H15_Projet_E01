@@ -8,7 +8,7 @@ namespace H15_Projet_E01.DAL
 {
     public class NotificationRepository: GenericRepository<Notification>
     {
-        public NotificationRepository(H15_PROJET_E01Entities1 context) : base(context) { }
+        public NotificationRepository(H15_PROJET_E01Entities3 context) : base(context) { }
         public IEnumerable<Notification> GetNotifications()
         {
             return Get();

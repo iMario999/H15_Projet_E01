@@ -12,18 +12,9 @@ namespace H15_Projet_E01.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Forfait
+    public partial class Photo
     {
-        public Forfait()
-        {
-            this.Seance = new HashSet<Seance>();
-        }
-    
-        public int ForfaitID { get; set; }
-        public string Nom { get; set; }
-        public string Description { get; set; }
-        public decimal Prix { get; set; }
-    
-        public virtual ICollection<Seance> Seance { get; set; }
+        public int PhotoID { get; set; }
+        public int SeanceID { get; set; }
     }
 }

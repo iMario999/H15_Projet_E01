@@ -8,7 +8,7 @@ namespace H15_Projet_E01.DAL
 {
     public class ForfaitRepository : GenericRepository<Forfait>
     {
-        public ForfaitRepository(H15_PROJET_E01Entities1 context) : base(context) { }
+        public ForfaitRepository(H15_PROJET_E01Entities3 context) : base(context) { }
         public IEnumerable<Forfait> GetForfaits()
         {
             return Get();
