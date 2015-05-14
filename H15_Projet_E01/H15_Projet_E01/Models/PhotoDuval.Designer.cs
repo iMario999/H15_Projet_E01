@@ -1,4 +1,4 @@
-﻿// La génération de code T4 est activée pour le modèle 'C:\Users\1145173\Desktop\H15_Projet_E01\H15_Projet_E01\H15_Projet_E01\Models\PhotoDuval.edmx'. 
+﻿// La génération de code T4 est activée pour le modèle 'C:\Users\1030672\Desktop\H15_Projet_E01\H15_Projet_E01\H15_Projet_E01\Models\PhotoDuval.edmx'. 
 // Pour activer la génération de code héritée, définissez la valeur de la propriété
 // du concepteur 'Stratégie de génération de code' sur 'ObjectContext hérité'. Cette propriété est disponible dans la fenêtre Propriétés lorsque le modèle
 //  est ouvert dans le concepteur.

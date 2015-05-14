@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Photographe" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Seance" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Statut" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.sysdiagram" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_AgentID_SeanceID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_SeanceFactureID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_ForfaitID_SeanceID" ManuallyRouted="false" />

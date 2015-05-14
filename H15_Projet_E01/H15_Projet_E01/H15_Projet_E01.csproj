@@ -181,9 +181,6 @@
     <Compile Include="Models\Statut.cs">
       <DependentUpon>PhotoDuval.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PhotoDuval.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regle_Affaire\DateValidate.cs" />
     <Compile Include="Regle_Affaire\SeanceValidation.cs" />
