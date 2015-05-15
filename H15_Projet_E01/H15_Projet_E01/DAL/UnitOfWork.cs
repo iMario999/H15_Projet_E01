@@ -14,6 +14,7 @@ namespace H15_Projet_E01.DAL
         private AgentRepository agentRepository;
         private ForfaitRepository forfaitRepository;
         private NotificationRepository notificationRepository;
+        private PhotographeRepository photographeRepositorys;
 
         //======================================================================================
         public SeanceRepository SeanceRepository
@@ -28,6 +29,22 @@ namespace H15_Projet_E01.DAL
                 return seanceRepository;
             }
         }
+
+        public PhotographeRepository photographeRepository
+        {
+            get
+            {
+                if (this.photographeRepositorys == null)
+                {
+
+                    this.photographeRepositorys = new PhotographeRepository(context);
+                }
+                return photographeRepositorys;
+            }
+        }
+
+
+
         public AgentRepository AgentRepository
         {
             get
