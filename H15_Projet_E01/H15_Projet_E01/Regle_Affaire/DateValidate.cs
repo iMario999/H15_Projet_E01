@@ -16,9 +16,14 @@ namespace H15_Projet_E01.Regle_Affaire
 
             Seance seanceAvantModif = unitOfWork.SeanceRepository.GetSeanceByID(seance.SeanceID);
 
+
             if (seanceAvantModif.DateSeance != seance.DateSeance || seanceAvantModif.HeureSeance.Value.TimeOfDay != seance.HeureSeance.Value.TimeOfDay)
                 //il y a eu un changement de date ou heure
             {
+
+                if (seanceAvantModif.DateSeance < DateTime.Now)
+                    return new ValidationResult("Vous ne pouvez pas modifier la date de la séance déjà passée");
+
                 if (seance.DateSeance == null)
                 {
                     if (seance.HeureSeance != null)

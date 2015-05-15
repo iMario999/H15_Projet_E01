@@ -16,15 +16,19 @@
     <table class="table">
         <tr>
             <th>Date</th>
+            <th>Message</th>
+            @*<th>Date</th>
             <th>Date de la séance</th>
-            <th>Commentaire</th>
-            <th>Statut</th>
+            <th>Statut</th>*@
         </tr>
 
         @foreach (var notif in ViewBag.Notifications)
         {
             <tr>
                 <td>@notif.DateNotification</td>
+                <td>Séance #@notif.Seance.SeanceID a été @notif.Statut.Nom</td>
+
+                @*<td>@notif.Seance.SeanceID</td>
                 @if (notif.Seance.DateSeance != null)
                 {
                     <td>@notif.Seance.DateSeance.ToString("yyyy-MM-dd HH:mm") </td>
@@ -33,8 +37,7 @@
                 {
                     <td>En attente</td>
                 }
-                <td>@notif.Seance.Commentaire</td>
-                <td>@notif.Statut.Nom</td>
+                <td>@notif.Statut.Nom</td>*@
             </tr>
 
         }
@@ -54,10 +57,11 @@ else
 {
     <table class="table">
         <tr>
+            <th># Séance</th>
             <th>Date</th>
             <th>Adresse</th>
             <th>Ville</th>
-            <th># telephone</th>
+            <th># Téléphone</th>
             <th>Commentaire</th>
             <th>Forfait</th>
             <th>Statut</th>
@@ -68,6 +72,7 @@ else
             if (seance.DateSeance != null && seance.DateSeance.Value.Year == DateTime.Now.Year)
             {
                 <tr>
+                    <td>@Html.DisplayFor(modelItem => seance.SeanceID)</td>
                     <td>@seance.DateSeance.Value.Date.ToString("yyyy-MM-dd") @seance.HeureSeance.Value.TimeOfDay</td>
                     <td>@Html.DisplayFor(modelItem => seance.Adresse)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Ville)</td>

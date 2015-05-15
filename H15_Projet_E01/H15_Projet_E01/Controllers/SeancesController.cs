@@ -42,31 +42,21 @@ namespace H15_Projet_E01.Controllers
             ViewBag.AttenteShowParm = String.IsNullOrEmpty(enAttente) ? "All" : "";
 
             if (enAttente == "No")
-            {
-                seances = unitOfWork.SeanceRepository.getSeanceEnAttente(false);        
-            }
+                seances = unitOfWork.SeanceRepository.getSeanceEnAttente(false);      
             else if (enAttente == "Yes")
-            {
-                seances = unitOfWork.SeanceRepository.getSeanceEnAttente(true);            
-            }
+                seances = unitOfWork.SeanceRepository.getSeanceEnAttente(true);      
 
             if (searchString != null)
-            {
                 page = 1;
-            }
             else
-            {
                 searchString = currentFilter;
-            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
-
                 seances = from Seance seance in seances
                           where (seance.Agent.Nom.ToUpper() == searchString.ToUpper())
                           select seance;
             }
-
 
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
