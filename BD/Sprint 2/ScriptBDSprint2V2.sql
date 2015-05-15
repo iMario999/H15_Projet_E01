@@ -73,7 +73,7 @@ IF(UPDATE([DateSeance]))
 				VALUES (@SeanceID,2,GETDATE()) 
 
 			END  
-		ELSE
+		ELSE IF(@VielleDate != @DateAjouter)
 			BEGIN
 
 				UPDATE dbo.Seance
