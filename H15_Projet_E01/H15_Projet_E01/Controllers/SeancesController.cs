@@ -54,7 +54,7 @@ namespace H15_Projet_E01.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 seances = from Seance seance in seances
-                          where (seance.Agent.Nom.ToUpper() == searchString.ToUpper())
+                          where (seance.Agent.Nom.ToUpper().Contains(searchString.ToUpper()))
                           select seance;
             }
 
@@ -117,7 +117,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID")] Seance seance)
+        public ActionResult Create([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID,PhotographeID")] Seance seance)
         {
             if (ModelState.IsValid)
             {
@@ -147,6 +147,7 @@ namespace H15_Projet_E01.Controllers
             }           
             PopulateAgentsDrop(seance.AgentID);
             ViewBag.AgentID = new SelectList(unitOfWork.AgentRepository.GetAgents(), "AgentID", "Nom", seance.AgentID);
+            ViewBag.PhotographeID = new SelectList(unitOfWork.photographeRepository.GetPhotographes(), "PhotographeID", "Nom", seance.PhotographeID);
             PopulateForfaitsDrop(seance.ForfaitID);
             return View(seance);
         }
@@ -156,7 +157,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID, StatutID, RowVersion")] Seance seance)
+        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID, StatutID,PhotographeID, RowVersion")] Seance seance)
         {
             /*
             if (ModelState.IsValid)
@@ -169,7 +170,7 @@ namespace H15_Projet_E01.Controllers
             */
 
             Seance seanceModif = unitOfWork.SeanceRepository.GetSeanceByID(seance.SeanceID);
-            if (TryUpdateModel(seanceModif, new string[]{"SeanceID","DateSeance","Adresse","Ville","Telephone","Commentaire","AgentID","FactureID","HeureSeance","ForfaitID","StatutID", "RowVersion"}))
+            if (TryUpdateModel(seanceModif, new string[] { "SeanceID", "DateSeance", "Adresse", "Ville", "Telephone", "Commentaire", "AgentID", "FactureID", "HeureSeance", "ForfaitID", "PhotographeID", "StatutID", "RowVersion" }))
             {
                 unitOfWork.SeanceRepository.UpdateSeance(seanceModif);
                 try{
