@@ -47,7 +47,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PhotographeID,Nom")] Photographe photographe)
+        public ActionResult Create([Bind(Include = "PhotographeID,Nom,Prenom,Telephone,email")] Photographe photographe)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PhotographeID,Nom")] Photographe photographe)
+        public ActionResult Edit([Bind(Include = "PhotographeID,Nom,Prenom,Telephone,email")] Photographe photographe)
         {
             if (ModelState.IsValid)
             {
@@ -126,3 +126,4 @@ namespace H15_Projet_E01.Controllers
         }
     }
 }
+
