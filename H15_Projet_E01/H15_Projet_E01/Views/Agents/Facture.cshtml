@@ -24,13 +24,14 @@
             }
         </dd>
 
-        <dt>
-            Total
-        </dt>
-
-        <dd>
-            @ViewBag.seance.Facture.Total $  Taxes incluses
-        </dd>
+        <dt>Sous-Total</dt>
+        <dd>@ViewBag.tabPrix[0]</dd>
+        <dt>TPS</dt>
+        <dd>@ViewBag.tabPrix[1]</dd>
+        <dt>TVQ</dt>
+        <dd>@ViewBag.tabPrix[2]</dd>
+        <dt>Total</dt>
+        <dd>@ViewBag.tabPrix[3]</dd>
 
     </dl>
 </div>

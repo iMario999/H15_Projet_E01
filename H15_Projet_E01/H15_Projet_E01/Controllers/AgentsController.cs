@@ -147,6 +147,17 @@ namespace H15_Projet_E01.Controllers
 
             ViewBag.Seance = seance;
 
+            string[] tabPrix = new string[4];
+            double tps = ((double)seance.Forfait.Prix * 0.05);
+            double tvq = ((double)seance.Forfait.Prix * 0.09975);
+            double total = (double)seance.Forfait.Prix + tps + tvq;
+            tabPrix[0] = seance.Forfait.Prix.ToString("0.00") + "$";
+            tabPrix[1] = ((double)seance.Forfait.Prix * 0.05).ToString("0.00") + "$";
+            tabPrix[2] = ((double)seance.Forfait.Prix * 0.09975).ToString("0.00") + "$";
+            tabPrix[3] = total.ToString("0.00") + "$";
+
+            ViewBag.tabPrix = tabPrix;
+
             return View("Facture");
         }
 
