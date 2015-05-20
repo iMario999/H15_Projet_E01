@@ -39,6 +39,7 @@ namespace H15_Projet_E01.DAL
                     DeletePhoto(id);
             }
         }
+        /*
         public byte[] GetImage(int id)
         {
             Photo photo = Get(filter:s => s.PhotoID == id).Single();
@@ -55,6 +56,6 @@ namespace H15_Projet_E01.DAL
                  return photo.Path; 
             }
              return null;
-           }
+           }*/
         }
     }

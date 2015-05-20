@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="H15_PROJET_E01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="H15_PROJET_E01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent">
           <Key>
             <PropertyRef Name="AgentID" />
@@ -49,7 +49,8 @@
           </Key>
           <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SeanceID" Type="int" Nullable="false" />
-          <Property Name="Path" Type="varbinary" MaxLength="1" />
+          <Property Name="fileType" Type="nvarchar" MaxLength="5" />
+          <Property Name="Path" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Photographe">
           <Key>
@@ -192,6 +193,9 @@
         <Function Name="ufnCalculTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
           <Parameter Name="SeanceID" Type="int" Mode="In" />
         </Function>
+        <Function Name="ufnNomPhotoGraphe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="PhotographeID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="H15_PROJET_E01ModelStoreContainer">
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
@@ -234,7 +238,8 @@
             <End Role="Seance" EntitySet="Seance" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="H15_PROJET_E01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -287,7 +292,8 @@
           </Key>
           <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SeanceID" Type="Int32" Nullable="false" />
-          <Property Name="Path" Type="Binary" MaxLength="1" FixedLength="false" />
+          <Property Name="fileType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Seance" Relationship="Self.FK_PhotoID_Seance" FromRole="Photo" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Photographe">
@@ -299,8 +305,8 @@
           <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Telephone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Seances" Relationship="Self.FK_Seance_PhotographeID" FromRole="Photographe" ToRole="Seance" />
           <Property Name="NomComplet" Type="String" MaxLength="60" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_Seance_PhotographeID" FromRole="Photographe" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Seance">
           <Key>
@@ -533,6 +539,7 @@
               <MappingFragment StoreEntitySet="Photo">
                 <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
                 <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
+                <ScalarProperty Name="fileType" ColumnName="fileType" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -540,12 +547,12 @@
           <EntitySetMapping Name="Photographes">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Photographe">
               <MappingFragment StoreEntitySet="Photographe">
-                <ScalarProperty Name="NomComplet" ColumnName="NomComplet" />
                 <ScalarProperty Name="PhotographeID" ColumnName="PhotographeID" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="NomComplet" ColumnName="NomComplet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
