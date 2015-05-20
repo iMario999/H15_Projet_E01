@@ -147,7 +147,7 @@ namespace H15_Projet_E01.Controllers
             }           
             PopulateAgentsDrop(seance.AgentID);
             ViewBag.AgentID = new SelectList(unitOfWork.AgentRepository.GetAgents(), "AgentID", "Nom", seance.AgentID);
-            ViewBag.PhotographeID = new SelectList(unitOfWork.photographeRepository.GetPhotographes(), "PhotographeID", "Nom", seance.PhotographeID);
+            ViewBag.PhotographeID = new SelectList(unitOfWork.photographeRepository.GetPhotographes(), "PhotographeID","Nom", seance.PhotographeID);
             PopulateForfaitsDrop(seance.ForfaitID);
             return View(seance);
         }
@@ -197,6 +197,7 @@ namespace H15_Projet_E01.Controllers
             }
             PopulateAgentsDrop();
             PopulateForfaitsDrop();
+            ViewBag.PhotographeID = new SelectList(unitOfWork.photographeRepository.GetPhotographes(), "PhotographeID", "Nom", seance.PhotographeID);
             return View(seance);
         }
 
