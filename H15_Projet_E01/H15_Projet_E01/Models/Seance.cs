@@ -38,8 +38,8 @@ namespace H15_Projet_E01.Models
         public virtual Facture Facture { get; set; }
         public virtual Forfait Forfait { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
         public virtual Photographe Photographe { get; set; }
         public virtual Statut Statut { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
     }
 }
