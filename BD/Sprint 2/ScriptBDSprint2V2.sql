@@ -164,6 +164,8 @@ ADD NbPhotosPrise int NULL
 
 
 -- TRIGGER photo prises 
+
+DROP TRIGGER dbo.Trg_photoPrise
 GO
 CREATE TRIGGER dbo.Trg_photoPrise
 ON dbo.Seance
@@ -175,7 +177,7 @@ DECLARE @SeanceID int
 DECLARE @StatutID int 
 DECLARE @NbPhotos int 
 SELECT @SeanceID = SeanceID, @StatutID = StatutID, @NbPhotos = NbPhotosPrise FROM inserted
-IF(@NbPhotos != NULL )
+IF(@NbPhotos IS NOT NULL )
 BEGIN
 IF(UPDATE(NbPhotosPrise))
 	BEGIN
@@ -198,7 +200,8 @@ ADD DateFacturation DateTime NULL
 
 --Trigger Seance Facturé 
 GO
-
+DROP TRIGGER dbo.Trg_DateFacturationUpdate
+GO
 CREATE TRIGGER dbo.Trg_DateFacturationUpdate 
 ON dbo.Seance
 AFTER UPDATE
@@ -213,7 +216,7 @@ DECLARE	@DateFacturation datetime
 
 SELECT @SeanceID = SeanceID, @StatutID = StatutID, @DateFacturation =  DateFacturation FROM inserted
 
-IF(@DateFacturation != NULL)
+IF(@DateFacturation IS NOT NULL)
 BEGIN
 
 IF(UPDATE(DateFacturation))
