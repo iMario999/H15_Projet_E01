@@ -82,7 +82,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AgentID,Nom")] Agent agent)
+        public ActionResult Edit([Bind(Include = "AgentID,Nom, Prenom, Telephone, Email, Agence, Commentaire")] Agent agent)
         {
             if (ModelState.IsValid)
             {
