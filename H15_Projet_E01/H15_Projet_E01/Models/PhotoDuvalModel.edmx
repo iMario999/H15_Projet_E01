@@ -49,7 +49,7 @@
           </Key>
           <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SeanceID" Type="int" Nullable="false" />
-          <Property Name="Path" Type="nvarchar" MaxLength="200" />
+          <Property Name="Path" Type="varbinary" MaxLength="1" />
         </EntityType>
         <EntityType Name="Photographe">
           <Key>
@@ -287,7 +287,7 @@
           </Key>
           <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SeanceID" Type="Int32" Nullable="false" />
-          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="Binary" MaxLength="1" FixedLength="false" />
           <NavigationProperty Name="Seance" Relationship="Self.FK_PhotoID_Seance" FromRole="Photo" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Photographe">
