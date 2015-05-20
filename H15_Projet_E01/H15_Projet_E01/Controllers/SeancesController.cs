@@ -54,7 +54,7 @@ namespace H15_Projet_E01.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 seances = from Seance seance in seances
-                          where (seance.Agent.Nom.ToUpper().Contains(searchString.ToUpper()))
+                          where (seance.Photographe.Nom.ToUpper().Contains(searchString.ToUpper()))
                           select seance;
             }
 

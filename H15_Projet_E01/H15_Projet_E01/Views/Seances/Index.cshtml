@@ -11,17 +11,17 @@
     @Html.ActionLink("Demander une séance", "Create")
 </p>
 
-<ul>
+@*<ul>
     <li>@Html.ActionLink("Affichage brute", "Index", new { enAttente = "All", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })</li>
     <li>@Html.ActionLink("Afficher seulement les séances en attente", "Index", new { enAttente = "Yes", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })</li>
     <li>@Html.ActionLink("Afficher seulement les séances réservées", "Index", new { enAttente = "No", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })</li>
-</ul>
+</ul>*@
 
 
 @using (Html.BeginForm("Index", "Seances", FormMethod.Get))
 {
     <p>
-        Recherche par le nom d'agent: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Recherche par le nom de photographe: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Rechercher" />
     </p>
 }
