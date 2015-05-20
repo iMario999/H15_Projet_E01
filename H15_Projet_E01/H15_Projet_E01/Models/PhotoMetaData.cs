@@ -12,10 +12,11 @@ namespace H15_Projet_E01.Models
         internal sealed class PhotoMetaData
         {
             public int PhotoID { get; set; }
+            [Display(Name = "Séance")]
             public int SeanceID { get; set; }
-            [Required]
+            [Display(Name = "Type de fichier")]
             public string fileType { get; set; }
-            [Required]
+            [Display(Name = "Chemin d'accès")]
             public string Path { get; set; }
         }
     }
