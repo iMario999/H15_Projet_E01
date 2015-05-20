@@ -244,9 +244,34 @@ namespace H15_Projet_E01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            Seance seanceModif = unitOfWork.SeanceRepository.GetSeanceByID(id);
+            if (TryUpdateModel(seanceModif, new string[] { "SeanceID", "DateSeance", "Adresse", "Ville", "Telephone", "Commentaire", "AgentID", "FactureID", "HeureSeance", "NbPhotosPrise", "DateFacturation", "ForfaitID", "PhotographeID", "StatutID", "RowVersion" }))
+            {
+                unitOfWork.SeanceRepository.DeleteSeance(id);
+                unitOfWork.Save();
+                try
+                {
+                    unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    RecupereErreurValidation(ex);
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    var entry = ex.Entries.Single();
+                    RecupererErreurUpdate(ex);
+                }
+                catch (DbUpdateException ex)
+                {
+                    // RecupereErreurValidation(ex);
+                    //erreur lors de la modification de la BD
+                    ModelState.AddModelError("DbUpdateException", ex.Message);
 
-            unitOfWork.SeanceRepository.DeleteSeance(id);
-            unitOfWork.Save();
+                }
+
+            }
             return RedirectToAction("Index");
         }
 
