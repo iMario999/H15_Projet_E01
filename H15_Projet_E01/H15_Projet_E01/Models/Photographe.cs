@@ -24,6 +24,7 @@ namespace H15_Projet_E01.Models
         public string Prenom { get; set; }
         public string Telephone { get; set; }
         public string email { get; set; }
+        public string NomComplet { get; set; }
     
         public virtual ICollection<Seance> Seances { get; set; }
     }
