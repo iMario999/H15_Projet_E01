@@ -1,0 +1,92 @@
+﻿@model H15_Projet_E01.Models.Seance
+
+@{
+    ViewBag.Title = "CreatePhoto";
+}
+
+<h2>CreatePhoto</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Ajouter les photos pour la séance suivante:</h4>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DateSeance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateSeance)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Adresse)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Adresse)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ville)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ville)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Telephone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Commentaire)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Commentaire)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HeureSeance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HeureSeance)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Agent.Nom)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Agent.Nom)
+            </dd>
+        </dl>
+    
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Soumettre" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}   
+    <div>
+        @Html.ActionLink("Retour à la liste", "Index")
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

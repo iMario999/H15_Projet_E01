@@ -16,7 +16,7 @@ namespace H15_Projet_E01.Models
     {
         public int PhotoID { get; set; }
         public int SeanceID { get; set; }
-        public string Path { get; set; }
+        public byte[] Path { get; set; }
     
         public virtual Seance Seance { get; set; }
     }

@@ -147,7 +147,7 @@ namespace H15_Projet_E01.Controllers
             }           
             PopulateAgentsDrop(seance.AgentID);
             ViewBag.AgentID = new SelectList(unitOfWork.AgentRepository.GetAgents(), "AgentID", "Nom", seance.AgentID);
-            ViewBag.PhotographeID = new SelectList(unitOfWork.photographeRepository.GetPhotographes(), "PhotographeID","Nom", seance.PhotographeID);
+            ViewBag.PhotographeID = new SelectList(unitOfWork.PhotographeRepository.GetPhotographes(), "PhotographeID", "Nom", seance.PhotographeID);
             PopulateForfaitsDrop(seance.ForfaitID);
             return View(seance);
         }
@@ -197,7 +197,7 @@ namespace H15_Projet_E01.Controllers
             }
             PopulateAgentsDrop();
             PopulateForfaitsDrop();
-            ViewBag.PhotographeID = new SelectList(unitOfWork.photographeRepository.GetPhotographes(), "PhotographeID", "Nom", seance.PhotographeID);
+            ViewBag.PhotographeID = new SelectList(unitOfWork.PhotographeRepository.GetPhotographes(), "PhotographeID", "Nom", seance.PhotographeID);
             return View(seance);
         }
 
@@ -285,5 +285,47 @@ namespace H15_Projet_E01.Controllers
             }
         }
 
+        // GET: Seances/Details/5
+        public ActionResult CreatePhoto(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id);
+
+            if (seance == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(seance);
+        }
+
+        // POST: Seances/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePhoto([Bind(Include = "SeanceID,PhotoID,Path")] Photo photo)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.PhotoRepository.InsertPhoto(photo);
+                unitOfWork.Save();
+                return RedirectToAction("Index");
+            }
+
+            Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(photo.SeanceID);
+
+            return View(seance);
+        }
+       /* public FileContentResult GetImage(int id)
+        {
+
+           // return File(unitOfWork.PhotoRepository.GetImage(id), "image/jpg");
+
+        } */
     }
 }

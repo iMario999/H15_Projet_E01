@@ -22,15 +22,26 @@ namespace H15_Projet_E01.Controllers
         }
 
         // GET: Agents/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? seanceId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Agent agent = unitOfWork.AgentRepository.GetAgentByID(id);
-            var notifs = unitOfWork.NotificationRepository.GetNotificationsByAgentID(id).OrderByDescending(n => n.DateNotification).ToList();
-            ViewBag.Notifications = notifs;
+            agent.Seances.OrderByDescending(a => a.DateSeance);
+
+            //vue partiel : si une séance séléctionnée, afficher ses notif, si non, afficher toutes les notifs de l'agent
+            if (seanceId != null)
+            {
+                var notifs = unitOfWork.NotificationRepository.GetNotificationsBySeanceId(seanceId).OrderByDescending(n => n.DateNotification).ToList();
+                ViewBag.Notifications = notifs;
+            }
+            else
+            {
+                var notifs = unitOfWork.NotificationRepository.GetNotificationsByAgentID(id).OrderByDescending(n => n.DateNotification).ToList();
+                ViewBag.Notifications = notifs;
+            }
             
             if (agent == null)
             {
@@ -82,7 +93,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AgentID,Nom")] Agent agent)
+        public ActionResult Edit([Bind(Include = "AgentID,Nom, Prenom, Telephone, Email, Agence, Commentaire")] Agent agent)
         {
             if (ModelState.IsValid)
             {

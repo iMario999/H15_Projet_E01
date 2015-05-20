@@ -9,49 +9,6 @@
     <hr />
 </div>
 
-
-<h3>Notifications:</h3>
-@if (ViewBag.Notifications != null && ViewBag.Notifications.Count > 0)
-{
-    <table class="table">
-        <tr>
-            <th>Date</th>
-            <th>Message</th>
-            @*<th>Date</th>
-            <th>Date de la séance</th>
-            <th>Statut</th>*@
-        </tr>
-
-        @foreach (var notif in ViewBag.Notifications)
-        {
-            <tr>
-                <td>@notif.DateNotification</td>
-                <td>Séance #@notif.Seance.SeanceID a été @notif.Statut.Nom</td>
-
-                @*<td>@notif.Seance.SeanceID</td>
-                @if (notif.Seance.DateSeance != null)
-                {
-                    <td>@notif.Seance.DateSeance.ToString("yyyy-MM-dd HH:mm") </td>
-                }
-                else
-                {
-                    <td>En attente</td>
-                }
-                <td>@notif.Statut.Nom</td>*@
-            </tr>
-
-        }
-    </table>
-}
-else
-{
-    <h4>Aucun notification</h4>
-}
-
-
-
-
-
 <h3>Seances:</h3>
 @if (Model.Seances != null && Model.Seances.Count > 0)
 {
@@ -66,6 +23,7 @@ else
             <th>Forfait</th>
             <th>Statut</th>
             <th>      </th>
+            <th>      </th>
         </tr>
 
         @foreach (var seance in Model.Seances)
@@ -74,32 +32,51 @@ else
             {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => seance.SeanceID)</td>
-                    <td>@seance.DateSeance.Value.Date.ToString("yyyy-MM-dd") @seance.HeureSeance.Value.TimeOfDay</td>
+                    <td>@seance.DateSeance.Value.Date.ToString("yyyy-MM-dd") @seance.HeureSeance.Value.ToString("HH:mm")</td>
                     <td>@Html.DisplayFor(modelItem => seance.Adresse)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Ville)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Telephone)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Commentaire)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Forfait.Nom)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Statut.Nom)</td>
+                    <td>
                     @if (seance.Facture != null)
                     {
-                        <td>@Html.ActionLink("Facture", "Load", new { id = seance.SeanceID })</td>
+                        @Html.ActionLink("Facture", "Load", new { id = seance.SeanceID })
+                        
                     }
-                    
-                    
+                    @Html.ActionLink("Notifications", "Details", new { seanceId = seance.SeanceID }) </td>
                 </tr>
-                
-                
             }
-           
         }
     </table>
-    
-
 }
 else
 {
     <h4>Aucun séances</h4>
+}
+
+<h3>Notifications:</h3>
+@if (ViewBag.Notifications != null && ViewBag.Notifications.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Message</th>
+        </tr>
+
+        @foreach (var notif in ViewBag.Notifications)
+        {
+            <tr>
+                <td>@notif.DateNotification</td>
+                <td>Séance #@notif.Seance.SeanceID a été @notif.Statut.Nom</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>Aucun notification</h4>
 }
 
 
