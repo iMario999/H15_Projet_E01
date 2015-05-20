@@ -51,3 +51,12 @@ ADD NomComplet AS dbo.ufnNomPhotoGraphe(PhotographeID)
 
 ALTER TABLE dbo.Photographe
 DROP COLUMN NomComplet
+
+
+--Modification Table Photo
+ALTER TABLE dbo.Photo
+DROP COLUMN Path
+
+ALTER TABLE dbo.Photo
+ADD fileType nvarchar(5),
+Path nvarchar(200)
