@@ -164,7 +164,7 @@ namespace H15_Projet_E01.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID, StatutID,PhotographeID, RowVersion")] Seance seance)
+        public ActionResult Edit([Bind(Include = "SeanceID,DateSeance,Adresse,Ville,Telephone,Commentaire,AgentID,FactureID,HeureSeance,ForfaitID, StatutID,DateFacturation,NbPhotosPrise,PhotographeID, RowVersion")] Seance seance)
         {
             /*
             if (ModelState.IsValid)
@@ -177,7 +177,7 @@ namespace H15_Projet_E01.Controllers
             */
 
             Seance seanceModif = unitOfWork.SeanceRepository.GetSeanceByID(seance.SeanceID);
-            if (TryUpdateModel(seanceModif, new string[] { "SeanceID", "DateSeance", "Adresse", "Ville", "Telephone", "Commentaire", "AgentID", "FactureID", "HeureSeance", "ForfaitID", "PhotographeID", "StatutID", "RowVersion" }))
+            if (TryUpdateModel(seanceModif, new string[] { "SeanceID", "DateSeance", "Adresse", "Ville", "Telephone", "Commentaire", "AgentID", "FactureID", "HeureSeance", "NbPhotosPrise", "DateFacturation", "ForfaitID", "PhotographeID", "StatutID", "RowVersion" }))
             {
                 unitOfWork.SeanceRepository.UpdateSeance(seanceModif);
                 try{

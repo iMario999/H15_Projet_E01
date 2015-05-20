@@ -27,6 +27,11 @@ namespace H15_Projet_E01.Models
             public int AgentID { get; set; }
             [DataType(DataType.Time)]
             public Nullable<System.DateTime> HeureSeance { get; set; }
+            [DataType(DataType.Date)]
+            [Display(Name = "Date de facturation")]
+            public Nullable<System.DateTime> DateFacturation { get; set; }
+            [Display(Name= " Nombres de photos prises")]
+            public Nullable<int> NbPhotosPrise { get; set; }
             
         } 
 

@@ -93,6 +93,23 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.NbPhotosPrise, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NbPhotosPrise, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NbPhotosPrise, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model.StatutID == 5) { 
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateFacturation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateFacturation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateFacturation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        }
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Soumettre" class="btn btn-default" />
             </div>
