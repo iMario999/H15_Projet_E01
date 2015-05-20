@@ -25,15 +25,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Seance.Adresse)
+            Total
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Seance.Adresse)
+            @ViewBag.seance.Facture.Total
         </dd>
 
     </dl>
 </div>
 <p>   
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la liste", "Index")
 </p>
