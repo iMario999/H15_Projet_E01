@@ -1,6 +1,8 @@
 ﻿using H15_Projet_E01.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -38,7 +40,7 @@ namespace H15_Projet_E01.DAL
             }
         }
 
-       /* public byte[] GetImage(int id)
+        public byte[] GetImage(int id)
         {
             Photo photo = Get(filter:s => s.PhotoID == id).Single();
             if (photo != null)  
@@ -48,13 +50,12 @@ namespace H15_Projet_E01.DAL
                     Image img = Image.FromFile(HttpContext.Current.Server.MapPath("~/Images/defaut.jpg"));
                     MemoryStream ms = new System.IO.MemoryStream();
                     img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    student.Photo = ms.ToArray();
+                    photo.Path = ms.ToArray();
                 } 
                // return File(student.Photo, "image/jpg"); 
                  return photo.Path; 
             }
              return null;
            }
-        }*/
+        }
     }
-}

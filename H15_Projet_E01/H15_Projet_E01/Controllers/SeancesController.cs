@@ -321,11 +321,11 @@ namespace H15_Projet_E01.Controllers
 
             return View(seance);
         }
-       /* public FileContentResult GetImage(int id)
+        public FileContentResult GetImage(int id)
         {
 
-           // return File(unitOfWork.PhotoRepository.GetImage(id), "image/jpg");
+           return File(unitOfWork.PhotoRepository.GetImage(id), "image/jpg");
 
-        } */
+        } 
     }
 }
