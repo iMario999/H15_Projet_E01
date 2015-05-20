@@ -132,7 +132,6 @@
     <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotographesController.cs" />
-    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\SeancesController.cs" />
     <Compile Include="DAL\AgentRepository.cs" />
     <Compile Include="DAL\ForfaitRepository.cs" />
@@ -265,12 +264,6 @@
     <Content Include="Views\Photographes\Index.cshtml" />
     <Content Include="Views\Agents\Facture.cshtml" />
     <Content Include="Views\Agents\_FacturePartial.cshtml" />
-    <Content Include="Views\Photos\Create.cshtml" />
-    <Content Include="Views\Photos\Delete.cshtml" />
-    <Content Include="Views\Photos\Details.cshtml" />
-    <Content Include="Views\Photos\Edit.cshtml" />
-    <Content Include="Views\Photos\Index.cshtml" />
-    <Content Include="Views\Seances\CreatePhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
