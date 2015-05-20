@@ -16,6 +16,7 @@ namespace H15_Projet_E01.Models
     {
         public int SeanceID { get; set; }
         public int ForfaitID { get; set; }
+        public Nullable<decimal> Total { get; set; }
     
         public virtual Seance Seance { get; set; }
     }

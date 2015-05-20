@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="925fbd1c8fb24eaf8a285c3c05a8840e" Name="Diagram1">
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Agent" Width="1.5" PointX="3.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Facture" Width="1.5" PointX="8.375" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="90d4e12335aa474bb208b34e6b537d04" Name="Diagram1">
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Agent" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Facture" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="H15_PROJET_E01Model.Forfait" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Notification" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Photo" Width="1.5" PointX="8.5" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Photographe" Width="1.5" PointX="8.375" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Seance" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="H15_PROJET_E01Model.Statut" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Notification" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Photo" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Photographe" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Seance" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="H15_PROJET_E01Model.Statut" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_AgentID_SeanceID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_SeanceFactureID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_ForfaitID_SeanceID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_SeanceID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID" ManuallyRouted="false" />
+        <AssociationConnector Association="H15_PROJET_E01Model.FK_PhotoID_Seance" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_Seance_PhotographeID" ManuallyRouted="false" />
         <AssociationConnector Association="H15_PROJET_E01Model.FK_StatutID_Seance" ManuallyRouted="false" />
-        <AssociationConnector Association="H15_PROJET_E01Model.FK_PhotoID_Seance" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
