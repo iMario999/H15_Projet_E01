@@ -284,7 +284,7 @@ namespace H15_Projet_E01.Controllers
                     ModelState.AddModelError("Statut", "Current value: " + databaseValues.Statut.Nom);
             }
         }
-
+        /*
         // GET: Seances/Details/5
         public ActionResult CreatePhoto(int? id)
         {
@@ -326,6 +326,6 @@ namespace H15_Projet_E01.Controllers
 
            return File(unitOfWork.PhotoRepository.GetImage(id), "image/jpg");
 
-        } 
+        } */
     }
 }
