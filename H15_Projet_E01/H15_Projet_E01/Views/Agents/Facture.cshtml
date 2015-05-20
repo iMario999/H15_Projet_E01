@@ -1,0 +1,39 @@
+﻿@model H15_Projet_E01.Models.Facture
+
+@{
+    ViewBag.Title = "Facture";
+}
+
+<h2>Facture</h2>
+
+<div>
+    <h4>Facture de la seance #@ViewBag.seance.SeanceID</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Forfait
+        </dt>
+     
+        <dd>
+            @foreach (var forfait in ViewBag.Forfait)
+            {
+                if (@ViewBag.seance.Facture.ForfaitID == forfait.ForfaitID)
+                {
+                    @forfait.Nom
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seance.Adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seance.Adresse)
+        </dd>
+
+    </dl>
+</div>
+<p>   
+    @Html.ActionLink("Back to List", "Index")
+</p>

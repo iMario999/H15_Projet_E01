@@ -272,6 +272,7 @@
     <Content Include="Views\Photographes\Details.cshtml" />
     <Content Include="Views\Photographes\Edit.cshtml" />
     <Content Include="Views\Photographes\Index.cshtml" />
+    <Content Include="Views\Agents\Facture.cshtml" />
     <Content Include="Views\Agents\_FacturePartial.cshtml" />
     <Content Include="Views\Photos\Create.cshtml" />
     <Content Include="Views\Photos\Delete.cshtml" />
