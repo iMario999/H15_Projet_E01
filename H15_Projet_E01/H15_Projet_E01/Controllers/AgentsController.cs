@@ -132,7 +132,7 @@ namespace H15_Projet_E01.Controllers
                 return HttpNotFound();
             }
 
-            /*ViewBag */
+            ViewBag.Seance = seance;
 
             return PartialView("_FacturePartial");
         }
