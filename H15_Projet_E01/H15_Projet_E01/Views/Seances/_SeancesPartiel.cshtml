@@ -1,5 +1,5 @@
 ﻿@model PagedList.IPagedList<H15_Projet_E01.Models.Seance>
-@using PagedList.Mvc;
+
 <table class="table">
     <tr>
         <th>
@@ -74,5 +74,3 @@
     }
 
 </table>
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
