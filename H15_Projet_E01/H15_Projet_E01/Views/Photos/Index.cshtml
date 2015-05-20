@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.fileType)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Path)
         </th>
         <th>
@@ -22,6 +25,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fileType)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Path)
         </td>

@@ -132,6 +132,7 @@
     <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotographesController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\SeancesController.cs" />
     <Compile Include="DAL\AgentRepository.cs" />
     <Compile Include="DAL\ForfaitRepository.cs" />
