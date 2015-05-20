@@ -26,39 +26,20 @@
     </p>
 }
 
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter, currentAttente = ViewBag.CurrentAttente })
         </th>
-        <th>
-            Heure
-        </th>
-        <th>
-            Adresse
-        </th>
-        <th>
-            Ville
-        </th>
-        <th>
-            Num. Téléphone
-        </th>
-        <th>
-            Commentaire
-        </th>
-        <th>
-            Forfait
-        </th> 
-
-        <th>
-            @Html.ActionLink("Agent", "Index", new { sortOrder = ViewBag.AgentSortParm, currentFilter = ViewBag.CurrentFilter, currentAttente = ViewBag.CurrentAttente })
-        </th>
-        <th>
-            Statut
-        </th>
-        <th>
-            Photographe
-        </th>
+        <th>Heure</th>
+        <th>Adresse</th>
+        <th>Ville</th>
+        <th>Num. Téléphone</th>
+        <th>Commentaire</th>
+        <th>Forfait</th> 
+        <th>@Html.ActionLink("Agent", "Index", new { sortOrder = ViewBag.AgentSortParm, currentFilter = ViewBag.CurrentFilter, currentAttente = ViewBag.CurrentAttente })</th>
+        <th>Statut</th>
+        <th>Photographe</th>
         <th></th>
     </tr>
 
@@ -67,10 +48,10 @@
         @if (item.DateSeance == null)
         {
             <td>
-                <p>En attente</p>
+                <p>En</p>
             </td>
             <td>
-                <p>En attente</p>
+                <p> attente</p>
             </td>
         }
         else
@@ -117,7 +98,9 @@
     </tr>
 }
 
-</table>
+</table>*@
+
+@Html.Partial("_SeancesPartiel")
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
