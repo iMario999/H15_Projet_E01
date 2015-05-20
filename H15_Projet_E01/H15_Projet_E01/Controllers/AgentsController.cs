@@ -118,6 +118,25 @@ namespace H15_Projet_E01.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Load(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id);
+
+            if (seance == null)
+            {
+                return HttpNotFound();
+            }
+
+            /*ViewBag */
+
+            return PartialView("_FacturePartial");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
