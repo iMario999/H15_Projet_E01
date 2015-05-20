@@ -260,7 +260,7 @@
     <Content Include="Views\Photographes\Details.cshtml" />
     <Content Include="Views\Photographes\Edit.cshtml" />
     <Content Include="Views\Photographes\Index.cshtml" />
-    <Content Include="Views\Agents\_FacturePartial.cshtml" />
+    <Content Include="Views\Agents\Facture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

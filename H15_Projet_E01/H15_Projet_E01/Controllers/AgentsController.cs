@@ -132,9 +132,11 @@ namespace H15_Projet_E01.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Forfait = unitOfWork.ForfaitRepository.GetForfaits();
+
             ViewBag.Seance = seance;
 
-            return PartialView("_FacturePartial");
+            return View("Facture");
         }
 
         protected override void Dispose(bool disposing)

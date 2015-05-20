@@ -81,7 +81,11 @@ else
                     <td>@Html.DisplayFor(modelItem => seance.Commentaire)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Forfait.Nom)</td>
                     <td>@Html.DisplayFor(modelItem => seance.Statut.Nom)</td>
-                    <td>@Html.ActionLink("Facture","Load")</td>
+                    @if (seance.Facture != null)
+                    {
+                        <td>@Html.ActionLink("Facture", "Load", new { id = seance.SeanceID })</td>
+                    }
+                    
                     
                 </tr>
                 
