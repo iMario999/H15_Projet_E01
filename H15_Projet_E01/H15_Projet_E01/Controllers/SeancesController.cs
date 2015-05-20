@@ -53,6 +53,13 @@ namespace H15_Projet_E01.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
+                List<Seance> lstS = new List<Seance>();
+                foreach (Seance s in seances)
+                {
+                    if (s.Photographe != null)
+                        lstS.Add(s);
+                }
+                seances = lstS;
                 seances = from Seance seance in seances
                           where (seance.Photographe.Nom.ToUpper().Contains(searchString.ToUpper()))
                           select seance;
