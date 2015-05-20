@@ -179,6 +179,7 @@
     <Compile Include="Models\Photographe.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhotographeMetaData.cs" />
     <Compile Include="Models\Seance.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
