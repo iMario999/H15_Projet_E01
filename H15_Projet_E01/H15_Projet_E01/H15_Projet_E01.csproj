@@ -187,16 +187,7 @@
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeanceMetaData.cs" />
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Statut.cs">
-      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
