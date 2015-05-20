@@ -132,6 +132,7 @@
     <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotographesController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\SeancesController.cs" />
     <Compile Include="DAL\AgentRepository.cs" />
     <Compile Include="DAL\ForfaitRepository.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\NotificationRepository.cs" />
     <Compile Include="DAL\PhotographeRepository.cs" />
+    <Compile Include="DAL\PhotoRepository.cs" />
     <Compile Include="DAL\SeanceRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
@@ -180,11 +182,21 @@
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhotographeMetaData.cs" />
+    <Compile Include="Models\PhotoMetaData.cs" />
     <Compile Include="Models\Seance.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SeanceMetaData.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Statut.cs">
+      <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>PhotoDuvalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +273,12 @@
     <Content Include="Views\Photographes\Edit.cshtml" />
     <Content Include="Views\Photographes\Index.cshtml" />
     <Content Include="Views\Agents\_FacturePartial.cshtml" />
+    <Content Include="Views\Photos\Create.cshtml" />
+    <Content Include="Views\Photos\Delete.cshtml" />
+    <Content Include="Views\Photos\Details.cshtml" />
+    <Content Include="Views\Photos\Edit.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
+    <Content Include="Views\Seances\CreatePhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,13 +10,10 @@
 namespace H15_Projet_E01.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Photo
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int PhotoID { get; set; }
-        public int SeanceID { get; set; }
-    
-        public virtual Seance Seance { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

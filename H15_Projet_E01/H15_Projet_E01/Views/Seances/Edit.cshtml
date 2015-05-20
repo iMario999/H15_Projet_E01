@@ -92,6 +92,14 @@
             </div>
         </div>
 
+        <img width="200" src="@Url.Action("GetImage", "Students", new { id = Model.StudentID })" />
+
+        <p>
+            @Html.LabelFor(model => model.Photo)
+            <input type="file" name="Image" />
+
+        </p>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Soumettre" class="btn btn-default" />
