@@ -1,4 +1,4 @@
-﻿@model H15_Projet_E01.Models.Seance
+﻿@model H15_Projet_E01.ViewModel.SeanceData
 
 @{
     ViewBag.Title = "Details";
@@ -10,65 +10,151 @@
     <h4>Seance</h4>
     <hr />
     <dl class="dl-horizontal">
+        @if (Model.Seance.DateSeance != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Seance.DateSeance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seance.DateSeance)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Seance.HeureSeance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seance.HeureSeance)
+            </dd>
+        }
         <dt>
-            @Html.DisplayNameFor(model => model.DateSeance)
+            @Html.DisplayNameFor(model => model.Seance.Adresse)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateSeance)
+            @Html.DisplayFor(model => model.Seance.Adresse)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Adresse)
+            @Html.DisplayNameFor(model => model.Seance.Ville)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Adresse)
+            @Html.DisplayFor(model => model.Seance.Ville)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ville)
+            @Html.DisplayNameFor(model => model.Seance.Telephone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ville)
+            @Html.DisplayFor(model => model.Seance.Telephone)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Telephone)
+            @Html.DisplayNameFor(model => model.Seance.Commentaire)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Telephone)
+            @Html.DisplayFor(model => model.Seance.Commentaire)
+        </dd>
+    </dl>
+
+
+</div>
+
+<div>
+    <h4>Agent</h4>
+    <dl class="dl-horizontal">
+        
+        <dt>
+            Nom
+        </dt>
+        <dd>
+            @Model.Agent.Prenom @Model.Agent.Nom
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent.Telephone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent.Agence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent.Agence)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Agent.Commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agent.Commentaire)
+        </dd>
+    </dl>
+
+</div>
+
+@if (Model.Photographe != null)
+{
+<div>
+    <h4>Photographe</h4>
+    <dl class="dl-horizontal">
+
+        <dt>
+            Nom
+        </dt>
+        <dd>
+            @Model.Photographe.NomComplet
+
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Commentaire)
+            @Html.DisplayNameFor(model => model.Photographe.Telephone)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Commentaire)
+            @Html.DisplayFor(model => model.Photographe.Telephone)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HeureSeance)
+            @Html.DisplayNameFor(model => model.Photographe.email)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.HeureSeance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Agent.Nom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Agent.Nom)
+            @Html.DisplayFor(model => model.Photographe.email)
         </dd>
 
     </dl>
+
 </div>
+   
+    if (Model.Photos != null)
+    {
+        <div>
+            <h4>Photos</h4>
+
+            @foreach (var photo in Model.Photos)
+            {
+                <img width="200" src="~/@photo.Path" />
+            }
+            
+
+        </div>
+    }
+}
+
 <p>
-    @Html.ActionLink("Modifier", "Edit", new { id = Model.SeanceID }) |
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Seance.SeanceID }) |
     @Html.ActionLink("Retour à la liste des séances", "Index")
 </p>

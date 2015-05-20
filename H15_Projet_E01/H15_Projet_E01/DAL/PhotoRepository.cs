@@ -15,6 +15,10 @@ namespace H15_Projet_E01.DAL
         {
             return Get();
         }
+        public IEnumerable<Photo> GetPhotosWithSeance()
+        {
+            return Get(includeProperties: "Seance");
+        }
         public Photo GetPhotoByID(int? id)
         {
             return GetByID(id);
@@ -31,6 +35,10 @@ namespace H15_Projet_E01.DAL
         {
             Delete(id);
         }
+        public IEnumerable<Photo> GetPhotosBySeanceID(int? id)
+        {
+            return Get().Where(p => p.SeanceID == id);
+        }
         public void DeletePhotosBySeanceID(int? id)
         {
             foreach (var item in GetPhotos())
@@ -39,23 +47,5 @@ namespace H15_Projet_E01.DAL
                     DeletePhoto(id);
             }
         }
-        /*
-        public byte[] GetImage(int id)
-        {
-            Photo photo = Get(filter:s => s.PhotoID == id).Single();
-            if (photo != null)  
-            {
-                if(photo.Path == null)
-                {//photo defaut
-                    Image img = Image.FromFile(HttpContext.Current.Server.MapPath("~/Images/defaut.jpg"));
-                    MemoryStream ms = new System.IO.MemoryStream();
-                    img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    photo.Path = ms.ToArray();
-                } 
-               
-                 return photo.Path; 
-            }
-             return null;
-           }*/
-        }
     }
+}

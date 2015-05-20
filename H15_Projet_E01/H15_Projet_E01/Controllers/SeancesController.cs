@@ -11,6 +11,7 @@ using H15_Projet_E01.DAL;
 using PagedList;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using H15_Projet_E01.ViewModel;
 
 namespace H15_Projet_E01.Controllers
 {
@@ -97,18 +98,31 @@ namespace H15_Projet_E01.Controllers
 
         // GET: Seances/Details/5
         public ActionResult Details(int? id)
-        {
+        {            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
+            var viewModel = new SeanceData();
             Seance seance = unitOfWork.SeanceRepository.GetSeanceByID(id);
+
             if (seance == null)
             {
                 return HttpNotFound();
+            }            
+            
+            viewModel.Seance = seance;
+            viewModel.Agent = unitOfWork.AgentRepository.GetAgentByID(seance.AgentID);
+            viewModel.Forfait = unitOfWork.ForfaitRepository.GetForfaitByID(seance.ForfaitID);
+
+            if (seance.PhotographeID != null)
+            {
+                viewModel.Photographe = unitOfWork.PhotographeRepository.GetPhotographeByID(seance.PhotographeID);
+                viewModel.Photos = unitOfWork.PhotoRepository.GetPhotosBySeanceID(seance.SeanceID);
             }
-            return View(seance);
+
+            return View(viewModel);
         }
 
         // GET: Seances/Create

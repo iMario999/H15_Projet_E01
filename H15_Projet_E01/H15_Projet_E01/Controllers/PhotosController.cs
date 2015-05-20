@@ -13,14 +13,12 @@ namespace H15_Projet_E01.Controllers
 {
     public class PhotosController : Controller
     {
-        private H15_PROJET_E01Entities3 db = new H15_PROJET_E01Entities3();
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Photos
         public ActionResult Index()
         {
-            var photos = db.Photos.Include(p => p.Seance);
-            return View(photos.ToList());
+            return View(unitOfWork.PhotoRepository.GetPhotosWithSeance().ToList());
         }
 
         // GET: Photos/Details/5
@@ -30,7 +28,8 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = db.Photos.Find(id);
+           
+            Photo photo = unitOfWork.PhotoRepository.GetPhotoByID(id);
             if (photo == null)
             {
                 return HttpNotFound();
@@ -41,7 +40,7 @@ namespace H15_Projet_E01.Controllers
         // GET: Photos/Create
         public ActionResult Create()
         {
-            ViewBag.SeanceID = new SelectList(db.Seances, "SeanceID", "Adresse");
+            ViewBag.SeanceID = new SelectList(unitOfWork.SeanceRepository.GetSeances(), "SeanceID", "Adresse");
             return View();
         }
 
@@ -69,13 +68,12 @@ namespace H15_Projet_E01.Controllers
             { 
                 //Copy the picture into the folder
                 image.SaveAs(Server.MapPath(subPath) +"\\"+ image.FileName);
-
-                db.Photos.Add(photo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                unitOfWork.PhotoRepository.InsertPhoto(photo);
+                unitOfWork.Save();
+                return RedirectToAction("Index", "Seances");
             }
 
-            ViewBag.SeanceID = new SelectList(db.Seances, "SeanceID", "Adresse", photo.SeanceID);
+            ViewBag.SeanceID = new SelectList(unitOfWork.SeanceRepository.GetSeances(), "SeanceID", "Adresse", photo.SeanceID);
             return View(photo);
         }
 
@@ -86,12 +84,12 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = db.Photos.Find(id);
+            Photo photo = unitOfWork.PhotoRepository.GetPhotoByID(id);
             if (photo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.SeanceID = new SelectList(db.Seances, "SeanceID", "Adresse", photo.SeanceID);
+            ViewBag.SeanceID = new SelectList(unitOfWork.SeanceRepository.GetSeances(), "SeanceID", "Adresse", photo.SeanceID);
             return View(photo);
         }
 
@@ -104,11 +102,11 @@ namespace H15_Projet_E01.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(photo).State = EntityState.Modified;
-                db.SaveChanges();
+                unitOfWork.PhotoRepository.UpdatePhoto(photo);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.SeanceID = new SelectList(db.Seances, "SeanceID", "Adresse", photo.SeanceID);
+            ViewBag.SeanceID = new SelectList(unitOfWork.SeanceRepository.GetSeances(), "SeanceID", "Adresse", photo.SeanceID);
             return View(photo);
         }
 
@@ -119,7 +117,7 @@ namespace H15_Projet_E01.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Photo photo = db.Photos.Find(id);
+            Photo photo = unitOfWork.PhotoRepository.GetPhotoByID(id);
             if (photo == null)
             {
                 return HttpNotFound();
@@ -132,9 +130,8 @@ namespace H15_Projet_E01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Photo photo = db.Photos.Find(id);
-            db.Photos.Remove(photo);
-            db.SaveChanges();
+            unitOfWork.PhotoRepository.DeletePhoto(id);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
@@ -142,7 +139,7 @@ namespace H15_Projet_E01.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

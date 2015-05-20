@@ -13,5 +13,9 @@ namespace H15_Projet_E01.DAL
         {
             return Get();
         }
+        public Forfait GetForfaitByID(int? id)
+        {
+            return GetByID(id);
+        }
     }
 }
