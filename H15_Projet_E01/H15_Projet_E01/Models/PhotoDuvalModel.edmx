@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="H15_PROJET_E01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="H15_PROJET_E01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent">
           <Key>
             <PropertyRef Name="AgentID" />
@@ -48,6 +48,7 @@
           </Key>
           <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SeanceID" Type="int" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Photographe">
           <Key>
@@ -105,6 +106,20 @@
             </Principal>
             <Dependent Role="Seance">
               <PropertyRef Name="ForfaitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoID_Seance">
+          <End Role="Seance" Type="Self.Seance" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seance">
+              <PropertyRef Name="SeanceID" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="SeanceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -173,14 +188,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="H15_PROJET_E01ModelStoreContainer">
-          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Forfait" EntityType="Self.Forfait" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Photographe" EntityType="Self.Photographe" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Seance" EntityType="Self.Seance" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Statut" EntityType="Self.Statut" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forfait" EntityType="Self.Forfait" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photographe" EntityType="Self.Photographe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seance" EntityType="Self.Seance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statut" EntityType="Self.Statut" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AgentID_SeanceID" Association="Self.FK_AgentID_SeanceID">
             <End Role="Agent" EntitySet="Agent" />
             <End Role="Seance" EntitySet="Seance" />
@@ -188,6 +203,10 @@
           <AssociationSet Name="FK_ForfaitID_SeanceID" Association="Self.FK_ForfaitID_SeanceID">
             <End Role="Forfait" EntitySet="Forfait" />
             <End Role="Seance" EntitySet="Seance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoID_Seance" Association="Self.FK_PhotoID_Seance">
+            <End Role="Seance" EntitySet="Seance" />
+            <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
           <AssociationSet Name="FK_Seance_PhotographeID" Association="Self.FK_Seance_PhotographeID">
             <End Role="Photographe" EntitySet="Photographe" />
@@ -262,6 +281,8 @@
           </Key>
           <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="SeanceID" Type="Int32" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Seance" Relationship="H15_PROJET_E01Model.FK_PhotoID_Seance" FromRole="Photo" ToRole="Seance" />
         </EntityType>
         <EntityType Name="Photographe">
           <Key>
@@ -297,6 +318,7 @@
           <NavigationProperty Name="Notifications" Relationship="Self.FK_SeanceID" FromRole="Seance" ToRole="Notification" />
           <NavigationProperty Name="Photographe" Relationship="Self.FK_Seance_PhotographeID" FromRole="Seance" ToRole="Photographe" />
           <NavigationProperty Name="Statut" Relationship="Self.FK_StatutID_Seance" FromRole="Seance" ToRole="Statut" />
+          <NavigationProperty Name="Photos" Relationship="H15_PROJET_E01Model.FK_PhotoID_Seance" FromRole="Seance" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Statut">
           <Key>
@@ -432,7 +454,25 @@
             <End Role="Statut" EntitySet="Statuts" />
             <End Role="Seance" EntitySet="Seances" />
           </AssociationSet>
+          <AssociationSet Name="FK_PhotoID_Seance" Association="H15_PROJET_E01Model.FK_PhotoID_Seance">
+            <End Role="Seance" EntitySet="Seances" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_PhotoID_Seance">
+          <End Type="H15_PROJET_E01Model.Seance" Role="Seance" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="H15_PROJET_E01Model.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seance">
+              <PropertyRef Name="SeanceID" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="SeanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -483,6 +523,7 @@
           <EntitySetMapping Name="Photos">
             <EntityTypeMapping TypeName="H15_PROJET_E01Model.Photo">
               <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
                 <ScalarProperty Name="SeanceID" ColumnName="SeanceID" />
               </MappingFragment>
